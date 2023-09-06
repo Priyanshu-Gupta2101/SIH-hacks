@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -7,21 +9,21 @@
     <title>Edification - Responsive Education HTML5 Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="{% static 'ScholarLink/assets/images/icon/favicon.ico' %}">
     <!-- all css here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/slicknav.min.css">
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <link rel="stylesheet" href="assets/css/default-css.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/default-css.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/responsive.css' %}">
     <!--color css-->
-    <link rel="stylesheet" id="triggerColor" href="assets/css/triggerplate/color-0.css">
+    <link rel="stylesheet" id="triggerColor" href="{% static 'ScholarLink/assets/css/triggerplate/color-0.css' %}">
     <!-- modernizr css -->
-    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="{% static 'ScholarLink/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
 </head>
 
 <body>
@@ -38,20 +40,20 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-sm-6 d-block d-lg-none">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
+                            <a href="login.html"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-lg-9 offset-lg-1 d-none d-lg-block">
                         <div class="main-menu menu-style2">
                             <nav>
                                 <ul id="m_menu_active">
-                                    <li class="active"><a href="index.html">Home</a>
+                                    <li class="active"><a href="login.html">Home</a>
                                     </li>
                                     <li><a href="about.html">About</a></li>
                                     <li class="middle-logo">
-                                        <a href="index.html">
-                                            <img src="assets/images/icon/logo-middle.png" alt="logo">
-                                            <img class="hb-bottom-shape" src="assets/images/icon/hb-bottom-shape.png" alt="logo">
+                                        <a href="login.html">
+                                            <img src="{% static 'ScholarLink/assets/images/icon/logo-middle.png' %}" alt="logo">
+                                            <img class="hb-bottom-shape" src="{% static 'ScholarLink/assets/images/icon/hb-bottom-shape.png' %}" alt="logo">
                                         </a>
                                     </li>
                                     <li><a href="#">Events</a></li>
@@ -63,8 +65,12 @@
                     <div class="col-lg-2 col-sm-5">
                         <div class="header-bottom-right-style-2">
                             <ul>
-                                <li><a class="btn btn-light btn-round" href="index.html">Log in</a></li>
-                                <li><a class="btn btn-primary btn-round" class="active" href="index.html">Sign Up</a></li>
+                                {% if user.is_authenticated %}
+                                <li><a class="btn btn-primary btn-round" class="active" href="{% url 'logout' %}">Log out</a></li>
+                                {% else %}
+                                <li><a class="btn btn-light btn-round" href="{% url 'login' %}">Log in</a></li>
+                                <li><a class="btn btn-primary btn-round" class="active" href="{% url 'register' %}">Sign Up</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     <div class="col-12 d-block d-lg-none">
@@ -79,7 +85,7 @@
     <!-- offset search area start -->
     <div class="offset-search">
         <form action="#">
-            <input type="text" name="search" placeholder="Sarch here...">
+            <input type="text" name="search" placeholder="Search here...">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
@@ -92,7 +98,7 @@
                         <h3>Admission'20</h3>
                         <h1 class="mb-5"><span class="primary-color">Build your Successful</span><b class="line-break"></b>Future with Edification</h1>
                         <p class="text-white-50">Find Your Preferred Courses & Improve Your Skills</p>
-                        <form action="#">
+                        <form action="{% url 'login' %}">
                             <div class="form-input ">
                                 <br><br>
                                 <input class="btn btn-primary btn-sm p-5" type="submit" value="Register Now">
@@ -211,7 +217,7 @@
     <!-- events area end --> 
     
     <div class="testimonial-area ptb--120"><!-- testimonial area start -->
-        <img class="tst-bg" src="assets/images/bg/tst-bg-shape.png" alt="image">
+        <img class="tst-bg" src="{% static 'ScholarLink/assets/images/bg/tst-bg-shape.png' %}" alt="image">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 text-center">
@@ -264,7 +270,7 @@
             <div class="row">
                 <div class="blog-carousel owl-carousel card-deck">                     
                   <div class="card mb-5"> 
-                    <img class="card-img-top" src="assets/images/blog/blog-thumbnail1.jpg" alt="image">
+                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail1.jpg' %}" alt="image">
                     <div class="card-body p-25"> 
                         <ul class="list-inline primary-color mb-3">
                             <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
@@ -276,7 +282,7 @@
                     </div>
                   </div><!-- card -->                
                   <div class="card mb-5"> 
-                    <img class="card-img-top" src="assets/images/blog/blog-thumbnail2.jpg" alt="image">
+                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail2.jpg' %}" alt="image">
                     <div class="card-body p-25"> 
                         <ul class="list-inline primary-color mb-3">
                             <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
@@ -289,7 +295,7 @@
                   </div><!-- card -->
        
                   <div class="card mb-5"> 
-                    <img class="card-img-top" src="assets/images/blog/blog-thumbnail3.jpg" alt="image">
+                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail3.jpg' %}" alt="image">
                     <div class="card-body p-25"> 
                         <ul class="list-inline primary-color mb-3">
                             <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
@@ -301,7 +307,7 @@
                     </div>
                   </div><!-- card -->         
                   <div class="card mb-5"> 
-                    <img class="card-img-top" src="assets/images/blog/blog-thumbnail1.jpg" alt="image">
+                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail1.jpg' %}" alt="image">
                     <div class="card-body p-25"> 
                         <ul class="list-inline primary-color mb-3">
                             <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
@@ -345,7 +351,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="widget widget-company">
-                            <a href="index.html"><img src="assets/images/icon/logo.png" alt="image"></a>
+                            <a href="login.html"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="image"></a>
                             <div class="address">
                                 <h6>Office Address</h6>
                                 <p>London Oxford Street, 012 United Kingdom.</p>
@@ -400,15 +406,15 @@
     <!-- footer area end -->
  
     <!-- jquery latest version -->
-    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="{% static 'ScholarLink/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
     <!-- bootstrap 4 js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'ScholarLink/assets/js/bootstrap.min.js' %}"></script>
     <!-- others plugins -->
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/scripts.js"></script>
+    <script src="{% static 'ScholarLink/assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/plugins.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/scripts.js' %}"></script>
 </body>
 
 </html>
