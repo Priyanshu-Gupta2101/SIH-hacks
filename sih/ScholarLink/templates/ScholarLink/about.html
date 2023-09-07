@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -7,21 +8,21 @@
     <title>Edification - Responsive Education HTML5 Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="{% static 'ScholarLink/assets/images/icon/favicon.ico' %}">
     <!-- all css here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/slicknav.min.css">
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <link rel="stylesheet" href="assets/css/default-css.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/default-css.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/responsive.css' %}">
     <!--color css-->
-    <link rel="stylesheet" id="triggerColor" href="assets/css/triggerplate/color-0.css">
+    <link rel="stylesheet" id="triggerColor" href="{% static 'ScholarLink/assets/css/triggerplate/color-0.css' %}">
     <!-- modernizr css -->
-    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="{% static 'ScholarLink/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
 </head>
 
 <body>
@@ -68,7 +69,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-sm-9">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/images/icon/logo.png" alt="logo"></a>
+                                <a href="{% url 'index' %}"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="logo"></a>
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-7 d-none d-lg-block">
@@ -77,12 +78,12 @@
                                     <ul id="m_menu_active">
                                         <li><a href="javascript:void(0);">Home</a>
                                             <ul class="submenu">
-                                                <li><a href="index.html">Home One</a></li>
+                                                <li><a href="{% url 'index' %}">Home One</a></li>
                                                 <li><a href="index2.html">Home Two</a></li>
                                                 <li><a href="index3.html">Home Three</a></li>
                                             </ul>
                                         </li>
-                                        <li class="active"><a href="about.html">About</a></li>
+                                        <li class="active"><a href="{% url 'about' %}">About</a></li>
                                         <li><a href="javascript:void(0);">Courses</a>
                                             <ul class="submenu">
                                                 <li><a href="courses.html">courses</a></li>
@@ -174,7 +175,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="section-title sec-style-two">
-                        <img class="title-top-shape" src="assets/images/icon/title-top-shape.png" alt="image">
+                        <img class="title-top-shape" src="{% static 'ScholarLink/assets/images/icon/title-top-shape.png' %}" alt="image">
                         <span class="text-uppercase">Take A Tour</span>
                         <h2>Video Tour on Edification</h2>
                     </div>
@@ -220,7 +221,7 @@
             </div>
             <div class="teacher-carousel owl-carousel card-deck">
               <div class="card mb-5"> 
-                <img src="assets/images/teacher/teacher-member1.jpg" alt="image"> 
+                <img src="{% static 'ScholarLink/assets/images/teacher/teacher-member1.jpg' %}" alt="image"> 
                 <div class="card-body teacher-content p-25">  
                   <h4 class="card-title mb-4"><a href="teachers.html">Patrick Garner Dony</a></h4>
                   <span class="primary-color d-block mb-3">Economist</span>
@@ -236,7 +237,7 @@
               </div><!-- card -->    
 
               <div class="card mb-5"> 
-                <img src="assets/images/teacher/teacher-member2.jpg" alt="image"> 
+                <img src="{% static 'ScholarLink/assets/images/teacher/teacher-member2.jpg' %}" alt="image"> 
                 <div class="card-body teacher-content p-25">  
                   <h4 class="card-title mb-4"><a href="teachers.html">Cameron Brown</a></h4>
                   <span class="primary-color d-block mb-3">Financier</span>
@@ -252,7 +253,7 @@
               </div><!-- card -->    
 
               <div class="card mb-5"> 
-                <img src="assets/images/teacher/teacher-member3.jpg" alt="image"> 
+                <img src="{% static 'ScholarLink/assets/images/teacher/teacher-member3.jpg' %}" alt="image"> 
                 <div class="card-body teacher-content p-25">  
                   <h4 class="card-title mb-4"><a href="teachers.html">Joseph Mack Monika</a></h4>
                   <span class="primary-color d-block mb-3">Languages</span>
@@ -267,7 +268,7 @@
                 </div>
               </div><!-- card -->  
               <div class="card mb-5"> 
-                <img src="assets/images/teacher/teacher-member4.jpg" alt="image"> 
+                <img src="{% static 'ScholarLink/assets/images/teacher/teacher-member4.jpg' %}" alt="image"> 
                 <div class="card-body teacher-content p-25">  
                   <h4 class="card-title mb-4"><a href="teachers.html">Patrick Garner Dony</a></h4>
                   <span class="primary-color d-block mb-3">Economist</span>
@@ -293,7 +294,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="widget widget-company">
-                            <a href="index.html"><img src="assets/images/icon/logo.png" alt="image"></a>
+                            <a href="{% url 'index' %}"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="image"></a>
                             <div class="address">
                                 <h6>OFFICE ADDRESS</h6>
                                 <p>London Oxford Street, 012 United Kingdom.</p>
@@ -348,15 +349,15 @@
     <!-- footer area end -->
  
     <!-- jquery latest version -->
-    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="{% static 'ScholarLink/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
     <!-- bootstrap 4 js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'ScholarLink/assets/js/bootstrap.min.js' %}"></script>
     <!-- others plugins -->
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/scripts.js"></script>
+    <script src="{% static 'ScholarLink/assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/plugins.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/scripts.js' %}"></script>
 </body>
 
 </html>
