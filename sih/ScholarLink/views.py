@@ -7,12 +7,13 @@ from django.contrib.auth.decorators import login_required
 
 
 from .models import *
+from .forms import *
 
 # Create your views here.
 
 @login_required(login_url="login/")
 def index(request):
-    return render(request, "ScholarLink/landing.html")
+    return render(request, "ScholarLink/index.html")
 
 def login_view(request):
     if request.method == "POST":
@@ -64,3 +65,15 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "ScholarLink/login.html")
+    
+
+def about(request):
+    return render(request, "ScholarLink/about.html")
+
+
+def contact(request):
+    return render(request, "ScholarLink/contact.html")
+
+    
+
+
