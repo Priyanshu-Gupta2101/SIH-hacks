@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
@@ -73,6 +73,60 @@ def about(request):
 
 def contact(request):
     return render(request, "ScholarLink/contact.html")
+
+
+def student(request):
+    if request.method == 'POST':
+        personal_detail = PersonalDetail(user=request.user)
+        contact_detail = ContactDetail(user=request.user)
+        guardian_detail = GuardianDetail(user=request.user)
+
+        student = Student(student=request.user, personal_detail=personal_detail, contact_detail=contact_detail, guardian_detail=guardian_detail)
+        student.save()
+        return HttpResponse("Student added successfully")
+    else:    
+        return render(request, "ScholarLink/registration.html")
+
+
+def personal_detail(request):
+    if request.method == 'POST':
+        form = PersonalDetailForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Personal details added successfully")     
+
+def contact_detail(request):
+    if request.method == 'POST':
+        form = ContactDetailForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Contact details added successfully")     
+
+
+def guardian_detail(request):
+    if request.method == 'POST':
+        form = GuardianDetailForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Guardian details added successfully")     
+        
+
+'''
+def add_student(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = StudentForm()
+
+    return render(request, 'ScholarLink/add_student.html', {'form': form})
+'''
+
 
     
 
