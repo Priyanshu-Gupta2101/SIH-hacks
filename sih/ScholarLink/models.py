@@ -60,22 +60,39 @@ class Institution(models.Model):
         return self.name
     
 
-class Student(models.Model):
-    institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
+class PersonalDetail(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField()
+    #date_of_birth = models.DateField()
     enrollment_number = models.CharField(max_length=20, unique=True)
+
+class ContactDetail(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     contact_email = models.EmailField()
     contact_phone = models.CharField(max_length=15, blank=True, null=True)
     address = models.TextField(blank=True, null=True)
+
+class GuardianDetail(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     guardian_name = models.CharField(max_length=100, blank=True, null=True)
     guardian_phone = models.CharField(max_length=15, blank=True, null=True)
 
+class FileDetail(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     academic_records = models.FileField(upload_to='academic_records/')
 
 
+class Student(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    institution = models.ForeignKey(Institution, on_delete=models.CASCADE, blank=True, null=True)
+    personal_detail = models.ForeignKey(PersonalDetail, on_delete=models.CASCADE, blank=True, null=True)
+    contact_detail = models.ForeignKey(ContactDetail, on_delete=models.CASCADE, blank=True, null=True)
+    guardian_detail = models.ForeignKey(GuardianDetail, on_delete=models.CASCADE, blank=True, null=True)
+    file_detail = models.ForeignKey(FileDetail, on_delete=models.CASCADE, blank=True, null=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
     def __str__(self):
-        return self.full_name
+        return f"{self.student.username}'s Profile with {self.personal_detail.enrollment_number}"
 
 
 '''
