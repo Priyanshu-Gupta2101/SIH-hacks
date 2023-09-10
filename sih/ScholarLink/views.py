@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -73,6 +73,20 @@ def about(request):
 
 def contact(request):
     return render(request, "ScholarLink/contact.html")
+
+
+def add_student(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = StudentForm()
+
+    return render(request, 'ScholarLink/add_student.html', {'form': form})
+
+
 
     
 
