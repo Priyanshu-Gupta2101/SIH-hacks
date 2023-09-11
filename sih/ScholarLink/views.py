@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 
+import json
 
 from .models import *
 from .forms import *
@@ -77,41 +78,75 @@ def contact(request):
 
 def student(request):
     if request.method == 'POST':
-        personal_detail = PersonalDetail(user=request.user)
-        contact_detail = ContactDetail(user=request.user)
-        guardian_detail = GuardianDetail(user=request.user)
+        personal_detail = PersonalDetail.objects.get(user=request.user)
+        contact_detail = ContactDetail.objects.get(user=request.user)
+        guardian_detail = GuardianDetail.objects.get(user=request.user)
 
         student = Student(student=request.user, personal_detail=personal_detail, contact_detail=contact_detail, guardian_detail=guardian_detail)
         student.save()
-        return HttpResponse("Student added successfully")
+        return HttpResponse(status=204)
     else:    
         return render(request, "ScholarLink/registration.html")
 
 
-def personal_detail(request):
-    if request.method == 'POST':
-        form = PersonalDetailForm(request.POST)
+def personal_detail(request):   
+    if request.method == 'PUT':
+        data = json.loads(request.body)
 
-        if form.is_valid():
-            form.save()
-            return HttpResponse("Personal details added successfully")     
+        full_name = data.get('full_name')
+        enrol_no = data.get('enrol_no')
+
+        if PersonalDetail.objects.filter(user=request.user):
+            personal_detail = PersonalDetail.objects.get(user=request.user)
+            personal_detail.full_name=full_name
+            personal_detail.enrollment_number=enrol_no
+            personal_detail.save()
+        else:
+            personal_detail = PersonalDetail(user=request.user, full_name=full_name, enrollment_number=enrol_no)
+            personal_detail.save()
+
+        print(data)
+
+        return HttpResponse(status=204)     
 
 def contact_detail(request):
-    if request.method == 'POST':
-        form = ContactDetailForm(request.POST)
+    if request.method == 'PUT':
+        data = json.loads(request.body)
 
-        if form.is_valid():
-            form.save()
-            return HttpResponse("Contact details added successfully")     
+        email = data.get('email')
+        phone_no = data.get('phone_no')
+
+        if ContactDetail.objects.filter(user=request.user):
+            contact_detail = ContactDetail.objects.get(user=request.user)
+            contact_detail.contact_email=email
+            contact_detail.contact_phone=phone_no
+            contact_detail.save()
+        else:
+            contact_detail = ContactDetail(user=request.user, contact_email=email, contact_phone=phone_no)
+            contact_detail.save()
+
+        print(data)
+        return HttpResponse(status=204)  
 
 
 def guardian_detail(request):
-    if request.method == 'POST':
-        form = GuardianDetailForm(request.POST)
+    if request.method == 'PUT':
+        data = json.loads(request.body)
 
-        if form.is_valid():
-            form.save()
-            return HttpResponse("Guardian details added successfully")     
+        guardian_name = data.get('guardian_name')
+        guardian_phone = data.get('guardian_no')
+
+        if GuardianDetail.objects.filter(user=request.user):
+            guardian_detail = GuardianDetail.objects.get(user=request.user)
+            guardian_detail.guardian_name = guardian_name
+            guardian_detail.guardian_phone = guardian_phone
+            guardian_detail.save()
+        else:
+            guardian_detail = GuardianDetail(user=request.user, guardian_name=guardian_name, guardian_phone=guardian_phone)
+            guardian_detail.save()
+
+        print(data)
+        return HttpResponse(status=204)  
         
 
 '''
