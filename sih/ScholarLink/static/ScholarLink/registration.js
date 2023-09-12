@@ -7,6 +7,8 @@ const nextBtnThird = document.querySelector(".next-2");
 const prevBtnFourth = document.querySelector(".prev-3");
 const nextBtnFourth = document.querySelector(".next-3");
 const prevBtnFifth = document.querySelector(".prev-4");
+const nextBtnFifth = document.querySelector(".next-4");
+const prevBtnSixth = document.querySelector(".prev-5");
 const submitBtn = document.querySelector(".submit");
 const progressText = document.querySelectorAll(".step p");
 const progressCheck = document.querySelectorAll(".step .check");
@@ -15,7 +17,7 @@ let current = 1;
 
 nextBtnFirst.addEventListener("click", function(event){
   event.preventDefault();
-  slidePage.style.marginLeft = "-25%";
+  slidePage.style.marginLeft = "-20%";
   current += 1;
 });
 nextBtnSec.addEventListener("click", function(event){
@@ -34,6 +36,13 @@ nextBtnFourth.addEventListener("click", function(event){
     current += 1;
     }
 );
+nextBtnFifth.addEventListener("click", function(event){
+    event.preventDefault();
+    slidePage.style.marginLeft = "-125%";
+    current += 1;
+    }
+);
+
 submitBtn.addEventListener("click", function(){
   current += 1;
   setTimeout(function(){
@@ -49,7 +58,7 @@ prevBtnSec.addEventListener("click", function(event){
 });
 prevBtnThird.addEventListener("click", function(event){
   event.preventDefault();
-  slidePage.style.marginLeft = "-25%";
+  slidePage.style.marginLeft = "-20%";
   current -= 1;
 });
 prevBtnFourth.addEventListener("click", function(event){
@@ -60,6 +69,12 @@ prevBtnFourth.addEventListener("click", function(event){
 prevBtnFifth.addEventListener("click", function(event){
     event.preventDefault();
     slidePage.style.marginLeft = "-75%";
+    current -= 1;
+    }
+);
+prevBtnSixth.addEventListener("click", function(event){
+    event.preventDefault();
+    slidePage.style.marginLeft = "-100%";
     current -= 1;
     }
 );
@@ -190,13 +205,12 @@ document.getElementById('file_detail').addEventListener('click', function (e) {
     let formData = new FormData();
     formData.append('profile_pic', document.getElementById('profile_pic').files[0]);
     formData.append('signature', document.getElementById('signature').files[0]);
-    formData.append('aadhaar', document.getElementById('aadhar_card').files[0]);
+    formData.append('aadhaar', document.getElementById('aadhaar_card').files[0]);
     if (document.getElementById('income_cert').files[0] != undefined) {
         formData.append('income_cert', document.getElementById('income_cert').files[0]);
     }
 
-    console.log(document.getElementById('profile_pic').files[0]);
-
+    
     // Send data to Django using fetch
     fetch('/file_detail/', {
         method: 'POST',
@@ -224,6 +238,44 @@ document.getElementById('file_detail').addEventListener('click', function (e) {
 
 
 
+
+  document.getElementById('institute_select').addEventListener('click', function (e) {
+    e.preventDefault();  // Prevent the form from submitting traditionally
+  
+    console.log('form submitted');  // Sanity check
+    // Collect form data
+  
+    
+    // Send data to Django using fetch
+    fetch('/institute_select/', {
+        method: 'POST',
+        body: JSON.stringify({
+            'institute_name': document.getElementById('institute_name').value,
+        }),
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),  // Include the CSRF token
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        // Handle successful response from Django
+        console.log(data);
+        // You can redirect or display a success message here
+    })
+    .catch(error => {
+        // Handle errors
+        console.error('There was a problem with the fetch operation:', error);
+    });
+  });
+  
+
+  
+
 // Function to get the CSRF token from cookies
 function getCookie(name) {
     let cookieValue = null;
@@ -240,3 +292,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+
+
+
