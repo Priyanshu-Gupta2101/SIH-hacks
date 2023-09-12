@@ -42,14 +42,20 @@
                     <div class="page">
 
                     <form>
-                        <!-- <div class="title">
-                            Basic Info:
-                        </div> -->
+                        <div class="title">
+                            Personal details:
+                        </div> 
                         <div class="field ">
                             <div class="label">
-                                Full Name
+                                First Name
                             </div>
-                            <input type="text" id="full_name">
+                            <input type="text" id="first_name">
+                        </div>
+                        <div class="field">
+                            <div class="label">
+                                Last Name
+                            </div>
+                            <input type="text" id="last_name">
                         </div>
                         <div class="field">
                             <div class="label">
@@ -57,7 +63,13 @@
                             </div>
                             <input type="number" id="enrol_no">
                         </div>
-                        
+                        <div class="field">
+                            <div class="label">
+                                Birth date
+                            </div>
+                            <input type="date" id="dob">
+                        </div>
+
                         <div class="field">
                             <button class="firstNext next" type="button" id="personal_detail">Next</button>
                         </div>
@@ -69,7 +81,7 @@
                     <form>
 
                         <div class="title">
-                            Contact Info:
+                            Contact details:
                         </div>
                         <div class="field">
                             <div class="label">
@@ -83,6 +95,37 @@
                             </div>
                             <input type="Number" id="phone_no">
                         </div>
+                        <div class="field">
+                            <div class="label">
+                                Address
+                            </div>
+                            <input type="text" id="address">
+                        </div>
+                        <div class="field">
+                            <div class="label">
+                                City
+                            </div>
+                            <input type="text" id="city">
+                        </div>
+                        <div class="field">
+                            <div class="label">
+                                State
+                            </div>
+                            <input type="text" id="state">
+                        </div>
+                        <div class="field">
+                            <div class="label">
+                                Pincode
+                            </div>
+                            <input type="number" id="pincode">
+                        </div>
+                        <div class="field">
+                            <div class="label">
+                                Country
+                            </div>
+                            <input type="text" id="country">
+                        </div>
+                
                         <div class="field btns">
                             <button class="prev-1 prev">Previous</button>
                             <button class="next-1 next" type="button" id="contact_detail">Next</button>
@@ -109,11 +152,64 @@
                             </div>
                             <input type="Number" id="guardian_no">
                         </div>
+                        <div class="field">
+                            <div class="label">
+                                Email
+                            </div>
+                            <input type="text" id="guardian_email">
+                        </div>
+                        <div class="field">
+                            <div class="label">
+                                Gender
+                            </div>
+                            <select id="guardian_gender">
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>                        
+                        </div>
                         <div class="field btns">
                             <button class="prev-2 prev">Previous</button>
                             <button class="next-2 next"  type="button" id="guardian_detail">Next</button>
                         </div>
                     </form>
+                    </div>
+
+                    <div class="page">
+                        <form enctype="multipart/form-data">
+                                                        
+                            <div class="title">
+                                File details:
+                            </div>
+                            <div class="field">
+                                <div class="label">
+                                    Profile pic
+                                </div>
+                                <input type="file" id="profile_pic">
+                            </div>
+                            <div class="field">
+                                <div class="label">
+                                    Signature
+                                </div>
+                                <input type="file" id="signature">
+                            </div>
+                            <div class="field">
+                                <div class="label">
+                                    Aadhar card
+                                </div>
+                                <input type="file" id="aadhar_card">
+                            </div>
+                            <div class="field">
+                                <div class="label">
+                                    Income certificate
+                                </div>
+                                <input type="file" id="income_cert">
+                            </div>
+                            <div class="field btns">
+                                <button class="prev-3 prev">Previous</button>
+                                <button class="next-3 next"  type="button" id="file_detail">Next</button>
+                            </div>
+                        </form>
                     </div>
 
                     <div class="page">
@@ -123,7 +219,7 @@
                                 Are you sure you want to submit the form?
                             </div>
                             <div class="field btns">
-                                <button class="prev-3 prev">Previous</button>
+                                <button class="prev-4 prev">Previous</button>
                                 <button class="submit" type="submit">Submit</button>
                             </div>
                         </form>

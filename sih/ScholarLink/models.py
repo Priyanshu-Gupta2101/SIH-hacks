@@ -55,31 +55,42 @@ class Institution(models.Model):
 
     affiliation_documents = models.FileField(upload_to='affiliation_documents/')
 
-
     def __str__(self):
         return self.name
     
 
 class PersonalDetail(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=100)
-    #date_of_birth = models.DateField()
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     enrollment_number = models.CharField(max_length=20, unique=True)
+    date_of_birth = models.DateField()
+
 
 class ContactDetail(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     contact_email = models.EmailField()
     contact_phone = models.CharField(max_length=15, blank=True, null=True)
     address = models.TextField(blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    pincode = models.CharField(max_length=6, blank=True, null=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
 
 class GuardianDetail(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     guardian_name = models.CharField(max_length=100, blank=True, null=True)
     guardian_phone = models.CharField(max_length=15, blank=True, null=True)
+    guardian_email = models.EmailField(blank=True, null=True)
+    guardian_gender = models.CharField(max_length=10, blank=True, null=True)
 
 class FileDetail(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    academic_records = models.FileField(upload_to='academic_records/')
+    profile_pic = models.ImageField(upload_to='profile_pic/')
+    signature = models.ImageField(upload_to='signature/')
+    #aadhaar_no = models.CharField(max_length=12, unique=True)
+    aadhaar = models.FileField(upload_to='aadhaar_card/')
+    income_cert = models.FileField(upload_to='income_certificate/', blank=True, null=True)
 
 
 class Student(models.Model):

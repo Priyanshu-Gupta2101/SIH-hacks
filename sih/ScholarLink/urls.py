@@ -15,6 +15,7 @@ urlpatterns = [
     path('personal_detail/', views.personal_detail, name="personal_detail"),
     path('contact_detail/', views.contact_detail, name="contact_detail"),
     path('guardian_detail/', views.guardian_detail, name="guardian_detail"),
+    path('file_detail/', views.file_detail, name="file_detail"),
 ]
 
 if settings.DEBUG:
