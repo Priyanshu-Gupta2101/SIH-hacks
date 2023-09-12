@@ -114,6 +114,13 @@ class Student(models.Model):
         return f"{self.student.username}'s Profile with {self.personal_detail.enrollment_number}"
 
 
+
+
+
+
+
+
+
 '''
 class VerificationStatus(models.Model):
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
