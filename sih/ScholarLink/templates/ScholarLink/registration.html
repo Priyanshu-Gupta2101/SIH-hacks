@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="page">
-                        <form enctype="multipart/form-data" method="put">
+                        <form enctype="multipart/form-data" method="post">
                             {% csrf_token %}   
                             <div class="title">
                                 File details:
@@ -197,7 +197,7 @@
                                 <div class="label">
                                     Aadhar card
                                 </div>
-                                <input type="file" id="aadhar_card">
+                                <input type="file" id="aadhaar_card">
                             </div>
                             <div class="field">
                                 <div class="label">
@@ -212,6 +212,31 @@
                         </form>
                     </div>
 
+     
+
+                    <div class="page">
+                    <form>
+                                                    
+                        <div class="title">
+                            Select Institute
+                        </div>
+                        <div class="field">
+                            <div class="label">
+                                Institute name
+                            </div>
+                            <select id="institute_name">
+                                {% for institute in institutes %}
+                                <option>{{ institute.institute_detail.name }}</option>
+                                {% endfor %}
+                            </select>                        
+                        </div>
+                        <div class="field btns">
+                            <button class="prev-4 prev">Previous</button>
+                            <button class="next-4 next"  type="button" id="institute_select">Next</button>
+                        </div>
+                    </form>
+                    </div>
+
                     <div class="page">
                         <form action="{% url 'student' %}" method="post">
                             {% csrf_token %}
@@ -219,7 +244,7 @@
                                 Are you sure you want to submit the form?
                             </div>
                             <div class="field btns">
-                                <button class="prev-4 prev">Previous</button>
+                                <button class="prev-5 prev">Previous</button>
                                 <button class="submit" type="submit">Submit</button>
                             </div>
                         </form>

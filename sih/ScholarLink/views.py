@@ -17,7 +17,8 @@ from .forms import *
 @login_required(login_url="login/")
 def index(request):
     return render(request, "ScholarLink/index.html", {
-        "student": Student.objects.filter(student=request.user)
+        "student": Student.objects.filter(student=request.user),
+        "institute": Institution.objects.filter(institute=request.user)
     })
 
 def login_view(request):
@@ -87,11 +88,18 @@ def student(request):
         guardian_detail = GuardianDetail.objects.get(user=request.user)
         file_detail = FileDetail.objects.get(user=request.user) 
 
-        student = Student(student=request.user, personal_detail=personal_detail, contact_detail=contact_detail, guardian_detail=guardian_detail, file_detail=file_detail)
+        student = Student.objects.get(student=request.user)
+        student.personal_detail = personal_detail
+        student.contact_detail = contact_detail
+        student.guardian_detail = guardian_detail
+        student.file_detail = file_detail
         student.save()
+
         return HttpResponse(status=204)
     else:    
-        return render(request, "ScholarLink/registration.html")
+        return render(request, "ScholarLink/registration.html", {
+            "institutes": Institution.objects.all(),
+        })
 
 
 def personal_detail(request):   
@@ -181,8 +189,8 @@ def file_detail(request):
         aadhaar = request.FILES.get('aadhaar')
         income_cert = request.FILES.get('income_cert')
 
-        
         print(profile_pic, signature, aadhaar, income_cert)
+        
 
         if FileDetail.objects.filter(user=request.user):
             file_detail = FileDetail.objects.get(user=request.user)
@@ -201,6 +209,84 @@ def file_detail(request):
                 file_detail.save()
 
         return HttpResponse(status=204)
+    
+
+def institute_select(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        institute_name = data.get('institute_name')
+        print(institute_name)
+        institute_obj = Institution.objects.get(institute_detail__name=institute_name)
+        student = Student(student=request.user, institution=institute_obj)
+        student.save()
+
+        return HttpResponse(status=204)  
+
+    
+
+def institution(request):
+    if request.method == 'POST':
+        institute_detail = InstituteDetail.objects.get(user=request.user)
+        contact_detail = ContactDetail.objects.get(user=request.user)
+        institute_doc = InstituteDoc.objects.get(user=request.user)
+
+        institute = Institution(institute=request.user, institute_detail=institute_detail, contact_detail=contact_detail, institution_doc=institute_doc)
+        institute.save()
+        return HttpResponse(status=204)
+    else:    
+        return render(request, "ScholarLink/institution.html")
+    
+
+def institution_detail(request):
+    if request.method == 'PUT':
+        data = json.loads(request.body)
+
+        name = data.get('name')
+        abbreviation = data.get('abbreviation')
+        established_year = data.get('established_year')
+        registration_number = data.get('registration_number')
+        website = data.get('website')
+
+        if InstituteDetail.objects.filter(user=request.user):
+            institute_detail = InstituteDetail.objects.get(user=request.user)
+            institute_detail.name=name
+            institute_detail.abbreviation=abbreviation
+            institute_detail.established_year=established_year
+            institute_detail.registration_number=registration_number
+            institute_detail.website=website
+            institute_detail.save()
+        else:
+            institute_detail = InstituteDetail(
+                user=request.user, name=name, abbreviation=abbreviation, established_year=established_year, registration_number=registration_number, website=website)
+            institute_detail.save()
+
+        return HttpResponse(status=204) 
+
+
+def institution_doc(request):
+    if request.method == 'POST':
+
+        print(request.FILES)
+
+        logo = request.FILES.get('logo')
+        affiliation_document = request.FILES.get('affiliation_document')
+
+        print(logo, affiliation_document)
+
+        if InstituteDoc.objects.filter(user=request.user):
+            institute_doc = InstituteDoc.objects.get(user=request.user)
+            institute_doc.logo = logo
+            institute_doc.affiliation_document = affiliation_document
+            institute_doc.save()
+        else:
+            institute_doc = InstituteDoc(user=request.user, logo=logo, affiliation_document=affiliation_document)
+            institute_doc.save()
+
+        return HttpResponse(status=204)   
+    
+
+
 
 
 '''

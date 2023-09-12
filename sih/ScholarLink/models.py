@@ -60,19 +60,19 @@ class ContactDetail(models.Model):
 class InstituteDoc(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='institution_logo/', blank=True, null=True)
-    scholarships_offered = models.ManyToManyField(Scholarship, related_name='scholarship_institutions')
-    accredited_by = models.ManyToManyField(AccreditationBody, related_name="authorized_institutions") 
+    scholarships_offered = models.ManyToManyField(Scholarship, related_name='scholarship_institutions', blank=True)
+    accredited_by = models.ManyToManyField(AccreditationBody, related_name="authorized_institutions" ,blank=True) 
     affiliation_document = models.FileField(upload_to='affiliation_document/')
 
 
 class Institution(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    institute = models.OneToOneField(User, on_delete=models.CASCADE)
     institute_detail = models.ForeignKey(InstituteDetail, on_delete=models.CASCADE,blank=True, null=True)
     contact_detail = models.ForeignKey(ContactDetail, on_delete=models.CASCADE, blank=True, null=True)
     institution_doc = models.ForeignKey(InstituteDoc, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.institute_detail.name
     
 
 class PersonalDetail(models.Model):
@@ -81,8 +81,6 @@ class PersonalDetail(models.Model):
     last_name = models.CharField(max_length=100)
     enrollment_number = models.CharField(max_length=20, unique=True)
     date_of_birth = models.DateField()
-
-
 
 
 class GuardianDetail(models.Model):

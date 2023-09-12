@@ -53,25 +53,32 @@
                         </div>
                         <div class="field">
                             <div class="label">
-                                Last Name
+                                Abbreviation
                             </div>
-                            <input type="text" id="last_name">
+                            <input type="text" id="abbreviation">
                         </div>
                         <div class="field">
                             <div class="label">
-                                Enrollment Number
+                                Established Year
                             </div>
-                            <input type="number" id="enrol_no">
+                            <input type="number" id="year" name="year" min="1900" max="2099">
                         </div>
                         <div class="field">
                             <div class="label">
-                                Birth date
+                                Registration Number
                             </div>
-                            <input type="date" id="dob">
+                            <input type="text" id="registration_number">
                         </div>
 
                         <div class="field">
-                            <button class="firstNext next" type="button" id="personal_detail">Next</button>
+                            <div class="label">
+                                Website
+                            </div>
+                            <input type="url" id="website" name="website" placeholder="https://example.com">
+                        </div>
+
+                        <div class="field">
+                            <button class="firstNext next" type="button" id="institution_detail">Next</button>
                         </div>
                     </form>
                     </div>
@@ -135,91 +142,59 @@
  
 
                     <div class="page">
-                    <form>
-                                                    
+                    <form>  
                         <div class="title">
-                            Guardian details:
+                            Institution Documents details:
                         </div>
                         <div class="field">
                             <div class="label">
-                                Guardian name
+                                Logo
                             </div>
-                            <input type="text" id="guardian_name">
+                            <input type="file" id="logo">
                         </div>
                         <div class="field">
                             <div class="label">
-                                Phone Number
+                                Select Scholarships
                             </div>
-                            <input type="Number" id="guardian_no">
+                            <select id="scholarships" name="scholarships" multiple>
+                                <option value="1">Scholarship 1</option>
+                                <option value="2">Scholarship 2</option>
+                                <option value="3">Scholarship 3</option>
+                                <!-- Add more options as needed -->
+                            </select>
                         </div>
                         <div class="field">
                             <div class="label">
-                                Email
+                                Accredated by
                             </div>
-                            <input type="text" id="guardian_email">
+                            <select id="scholarships" name="scholarships" multiple>
+                                <option value="1">Accredated 1</option>
+                                <option value="2">Accredated 2</option>
+                                <option value="3">Accredated 3</option>
+                                <!-- Add more options as needed -->
+                            </select>
                         </div>
                         <div class="field">
                             <div class="label">
-                                Gender
+                                Affiliation Document
                             </div>
-                            <select id="guardian_gender">
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
-                            </select>                        
+                            <input type="file" id="affiliation_document">
                         </div>
                         <div class="field btns">
                             <button class="prev-2 prev">Previous</button>
-                            <button class="next-2 next"  type="button" id="guardian_detail">Next</button>
+                            <button class="next-2 next"  type="button" id="institution_doc">Next</button>
                         </div>
                     </form>
                     </div>
 
                     <div class="page">
-                        <form enctype="multipart/form-data">
-                                                        
-                            <div class="title">
-                                File details:
-                            </div>
-                            <div class="field">
-                                <div class="label">
-                                    Profile pic
-                                </div>
-                                <input type="file" id="profile_pic">
-                            </div>
-                            <div class="field">
-                                <div class="label">
-                                    Signature
-                                </div>
-                                <input type="file" id="signature">
-                            </div>
-                            <div class="field">
-                                <div class="label">
-                                    Aadhar card
-                                </div>
-                                <input type="file" id="aadhar_card">
-                            </div>
-                            <div class="field">
-                                <div class="label">
-                                    Income certificate
-                                </div>
-                                <input type="file" id="income_cert">
-                            </div>
-                            <div class="field btns">
-                                <button class="prev-3 prev">Previous</button>
-                                <button class="next-3 next"  type="button" id="file_detail">Next</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="page">
-                        <form action="{% url 'student' %}" method="post">
+                        <form action="{% url 'institution' %}" method="post">
                             {% csrf_token %}
                             <div class="title">
                                 Are you sure you want to submit the form?
                             </div>
                             <div class="field btns">
-                                <button class="prev-4 prev">Previous</button>
+                                <button class="prev-3 prev">Previous</button>
                                 <button class="submit" type="submit">Submit</button>
                             </div>
                         </form>
