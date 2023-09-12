@@ -98,6 +98,8 @@
                         <h3>Admission'20</h3>
                         <h1 class="mb-5"><span class="primary-color">Build your Successful</span><b class="line-break"></b>Future with Edification</h1>
                         <p class="text-white-50">Find Your Preferred Courses & Improve Your Skills</p>
+
+                        {% if not student %}
                         <form action="{% url 'student' %}">
                             <div class="form-input ">
                                 <br><br>
@@ -105,6 +107,8 @@
                                 <i class="fa fa-search"></i>
                             </div>
                         </form>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>

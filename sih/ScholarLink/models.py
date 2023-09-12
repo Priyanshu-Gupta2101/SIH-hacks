@@ -39,21 +39,37 @@ class Scholarship(models.Model):
         return self.name
 
 
-class Institution(models.Model):
+class InstituteDetail(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     abbreviation = models.CharField(max_length=20, blank=True, null=True)
-    location = models.CharField(max_length=100)
-    website = models.URLField(blank=True, null=True)
-    contact_email = models.EmailField()
-    contact_phone = models.CharField(max_length=15)
     established_year = models.PositiveIntegerField()
     registration_number = models.CharField(max_length=20, unique=True)
-    logo = models.ImageField(upload_to='institution_logos/', blank=True, null=True)
+    website = models.URLField(blank=True, null=True)
 
+class ContactDetail(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    contact_email = models.EmailField()
+    contact_phone = models.CharField(max_length=15, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    pincode = models.CharField(max_length=6, blank=True, null=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
+
+class InstituteDoc(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    logo = models.ImageField(upload_to='institution_logo/', blank=True, null=True)
     scholarships_offered = models.ManyToManyField(Scholarship, related_name='scholarship_institutions')
-    accreditations_offered = models.ManyToManyField(AccreditationBody, related_name="authorized_institutions") 
+    accredited_by = models.ManyToManyField(AccreditationBody, related_name="authorized_institutions") 
+    affiliation_document = models.FileField(upload_to='affiliation_document/')
 
-    affiliation_documents = models.FileField(upload_to='affiliation_documents/')
+
+class Institution(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    institute_detail = models.ForeignKey(InstituteDetail, on_delete=models.CASCADE,blank=True, null=True)
+    contact_detail = models.ForeignKey(ContactDetail, on_delete=models.CASCADE, blank=True, null=True)
+    institution_doc = models.ForeignKey(InstituteDoc, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -67,15 +83,7 @@ class PersonalDetail(models.Model):
     date_of_birth = models.DateField()
 
 
-class ContactDetail(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    contact_email = models.EmailField()
-    contact_phone = models.CharField(max_length=15, blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    city = models.CharField(max_length=100, blank=True, null=True)
-    state = models.CharField(max_length=100, blank=True, null=True)
-    pincode = models.CharField(max_length=6, blank=True, null=True)
-    country = models.CharField(max_length=100, blank=True, null=True)
+
 
 class GuardianDetail(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
