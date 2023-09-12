@@ -190,15 +190,16 @@ document.getElementById('file_detail').addEventListener('click', function (e) {
     let formData = new FormData();
     formData.append('profile_pic', document.getElementById('profile_pic').files[0]);
     formData.append('signature', document.getElementById('signature').files[0]);
-    formData.append('aadhar', document.getElementById('aadhar_card').files[0]);
+    formData.append('aadhaar', document.getElementById('aadhar_card').files[0]);
     if (document.getElementById('income_cert').files[0] != undefined) {
         formData.append('income_cert', document.getElementById('income_cert').files[0]);
     }
 
-    
+    console.log(document.getElementById('profile_pic').files[0]);
+
     // Send data to Django using fetch
     fetch('/file_detail/', {
-        method: 'PUT',
+        method: 'POST',
         body: formData,
         headers: {
             'X-CSRFToken': getCookie('csrftoken'),  // Include the CSRF token

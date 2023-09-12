@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
+
 
 import json
 
@@ -14,7 +16,9 @@ from .forms import *
 
 @login_required(login_url="login/")
 def index(request):
-    return render(request, "ScholarLink/index.html")
+    return render(request, "ScholarLink/index.html", {
+        "student": Student.objects.filter(student=request.user)
+    })
 
 def login_view(request):
     if request.method == "POST":
@@ -168,11 +172,17 @@ def guardian_detail(request):
     
 
 def file_detail(request):
-    if request.method == 'PUT':
+    if request.method == 'POST':
+
+        print(request.FILES)
+
         profile_pic = request.FILES.get('profile_pic')
         signature = request.FILES.get('signature')
         aadhaar = request.FILES.get('aadhaar')
         income_cert = request.FILES.get('income_cert')
+
+        
+        print(profile_pic, signature, aadhaar, income_cert)
 
         if FileDetail.objects.filter(user=request.user):
             file_detail = FileDetail.objects.get(user=request.user)
@@ -191,9 +201,48 @@ def file_detail(request):
                 file_detail.save()
 
         return HttpResponse(status=204)
-        
+
 
 '''
+def file_detail(request):
+    if request.method == 'PUT':
+        fs = FileSystemStorage()
+
+        print(request.FILES)
+
+        profile_pic = request.FILES.get('profile_pic')
+        profile_pic = fs.save(profile_pic.name, profile_pic)
+
+        signature = request.FILES.get('signature')
+        signature = fs.save(signature.name, signature)
+
+        aadhaar = request.FILES.get('aadhaar')
+        aadhaar = fs.save(aadhaar.name, aadhaar)
+
+        income_cert = request.FILES.get('income_cert')
+        income_cert = fs.save(income_cert.name, income_cert)
+
+        
+        print(profile_pic, signature, aadhaar, income_cert)
+
+        if FileDetail.objects.filter(user=request.user):
+            file_detail = FileDetail.objects.get(user=request.user)
+            file_detail.profile_pic = profile_pic
+            file_detail.signature = signature
+            file_detail.aadhaar = aadhaar
+            if income_cert:
+                file_detail.income_cert = income_cert
+            file_detail.save()
+        else:
+            if income_cert:
+                file_detail = FileDetail(user=request.user, profile_pic=profile_pic, signature=signature, aadhaar=aadhaar, income_cert=income_cert)
+                file_detail.save()
+            else:
+                file_detail = FileDetail(user=request.user, profile_pic=profile_pic, signature=signature, aadhaar=aadhaar)
+                file_detail.save()
+
+        return HttpResponse(status=204)
+
 def add_student(request):
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)

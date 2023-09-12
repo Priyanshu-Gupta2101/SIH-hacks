@@ -176,8 +176,8 @@
                     </div>
 
                     <div class="page">
-                        <form enctype="multipart/form-data">
-                                                        
+                        <form enctype="multipart/form-data" method="put">
+                            {% csrf_token %}   
                             <div class="title">
                                 File details:
                             </div>
