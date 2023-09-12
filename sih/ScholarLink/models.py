@@ -26,14 +26,18 @@ class AccreditationBody(models.Model):
         return self.name
 
 
+
 class Scholarship(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     eligibility_criteria = models.TextField()
-    award_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    state_specific = models.BooleanField(default=False)
+    state_name = models.CharField(null = True, max_length=50)
+    # award_amount = models.DecimalField(max_digits=10, decimal_places=2)
     provider = models.CharField(max_length=100)
     website = models.URLField(blank=True, null=True)
     contact_email = models.EmailField()
+
 
     def __str__(self):
         return self.name

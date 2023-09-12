@@ -58,6 +58,7 @@ def register(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
+
         except IntegrityError:
             return render(request, "ScholarLink/login.html", {
                 "message": "Username already taken."
@@ -85,7 +86,8 @@ def student(request):
 
         student = Student(student=request.user, personal_detail=personal_detail, contact_detail=contact_detail, guardian_detail=guardian_detail, file_detail=file_detail)
         student.save()
-        return HttpResponse(status=204)
+
+        return redirect('/dashboard')
     else:    
         return render(request, "ScholarLink/registration.html")
 
@@ -207,6 +209,75 @@ def add_student(request):
 '''
 
 
+def student_profile_dashboard(request):
+    student = Student.objects.get(student = request.user)
+
+    print(student)
+    data = []
+    institution_dict = {
+        'name': student.institution.name,
+        'abbreviation': student.institution.abbreviation,
+        'location': student.institution.location,
+        'website': student.institution.website,
+        'contact_email': student.institution.contact_email,
+        'contact_phone': student.institution.contact_phone,
+        'established_year': student.institution.established_year,
+        'registration_number': student.institution.registration_number,
+        'logo': student.institution.logo.url if student.institution.logo else None,
+        'affiliation_documents': student.institution.affiliation_documents.url if student.institution.affiliation_documents else None,
+    }
+    # Create a dictionary for PersonalDetail
+    personal_detail_dict = {
+        'First name': student.personal_detail.first_name,
+        'Last name': student.personal_detail.last_name,
+        'Enrollment number': student.personal_detail.enrollment_number,
+        'Date of birth': student.personal_detail.date_of_birth,
+    }
+
+    # Create a dictionary for ContactDetail
+    contact_detail_dict = {
+        'Email id': student.contact_detail.contact_email,
+        'Phone Number': student.contact_detail.contact_phone,
+        'Address': student.contact_detail.address,
+        'City': student.contact_detail.city,
+        'State': student.contact_detail.state,
+        'Pincode': student.contact_detail.pincode,
+        'Country': student.contact_detail.country,
+    }
+
+    # Create a dictionary for GuardianDetail
+    guardian_detail_dict = {
+        'Guardian name': student.guardian_detail.guardian_name,
+        'Guardian phone': student.guardian_detail.guardian_phone,
+        'Guardian email': student.guardian_detail.guardian_email,
+        'Guardian gender': student.guardian_detail.guardian_gender,
+    }
+
+    # Create a dictionary for FileDetail
+    file_detail_dict = {
+        'Profile picture': student.file_detail.profile_pic.url if student.file_detail.profile_pic else None,
+        'Signature': student.file_detail.signature.url if student.file_detail.signature else None,
+        'Aadhaar': student.file_detail.aadhaar.url if student.file_detail.aadhaar else None,
+        'Income certificate': student.file_detail.income_cert.url if student.file_detail.income_cert else None,
+    }
+    data.append(personal_detail_dict)
+    data.append(contact_detail_dict)
+    data.append(guardian_detail_dict)
+    data.append(institution_dict)
+    data.append(file_detail_dict)
+    print(data[0])
     
+    return render(request, 'ScholarLink/profile.html' , {'data':data})
+
+def dashboard(request):
+    if request.user.is_authenticated:
+        scholarship_data = Scholarship.objects.all().values()
+        print(scholarship_data)
+
+        return render(request, 'ScholarLink/Dashboard.html', {'scholarship_data':scholarship_data})
+    else:
+        return render(request, "ScholarLink/login.html")
+        
+
 
 
