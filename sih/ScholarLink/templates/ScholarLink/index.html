@@ -1,0 +1,420 @@
+{% load static %}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Edification - Responsive Education HTML5 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'ScholarLink/assets/images/icon/favicon.ico' %}">
+    <!-- all css here -->
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/default-css.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/responsive.css' %}">
+    <!--color css-->
+    <link rel="stylesheet" id="triggerColor" href="{% static 'ScholarLink/assets/css/triggerplate/color-0.css' %}">
+    <!-- modernizr css -->
+    <script src="{% static 'ScholarLink/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+</head>
+
+<body>
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- prealoader area end -->
+    
+    <!-- header area start -->
+    <header id="header">
+        <!-- header two area start -->
+        <div class="header-two">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-sm-6 d-block d-lg-none">
+                        <div class="logo">
+                            <a href="login.html"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 offset-lg-1 d-none d-lg-block">
+                        <div class="main-menu menu-style2">
+                            <nav>
+                                <ul id="m_menu_active">
+                                    <li class="active"><a href="login.html">Home</a>
+                                    </li>
+                                    <li><a href="{% url 'about' %}">About</a></li>
+                                    <li class="middle-logo">
+                                        <a href="login.html">
+                                            <img src="{% static 'ScholarLink/assets/images/icon/logo-middle.png' %}" alt="logo">
+                                            <img class="hb-bottom-shape" src="{% static 'ScholarLink/assets/images/icon/hb-bottom-shape.png' %}" alt="logo">
+                                        </a>
+                                    </li>
+                                    <li><a href="#">Events</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-5">
+                        <div class="header-bottom-right-style-2">
+                            <ul>
+                                {% if user.is_authenticated %}
+                                <li><a class="btn btn-primary btn-round" class="active" href="{% url 'logout' %}">Log out</a></li>
+                                {% else %}
+                                <li><a class="btn btn-light btn-round" href="{% url 'login' %}">Log in</a></li>
+                                <li><a class="btn btn-primary btn-round" class="active" href="{% url 'register' %}">Sign Up</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    <div class="col-12 d-block d-lg-none">
+                        <div id="mobile_menu"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header two area end -->
+    </header>
+    <!-- header area end -->
+    <!-- offset search area start -->
+    <div class="offset-search">
+        <form action="#">
+            <input type="text" name="search" placeholder="Search here...">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <div class="body_overlay"></div>
+    <div class="hero-area has-color">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="hero-content">
+                        <h3>Admission'20</h3>
+                        <h1 class="mb-5"><span class="primary-color">Build your Successful</span><b class="line-break"></b>Future with Edification</h1>
+                        <p class="text-white-50">Find Your Preferred Courses & Improve Your Skills</p>
+                        <form action="{% url 'student' %}">
+                            <div class="form-input ">
+                                <br><br>
+                                <input class="btn btn-primary btn-sm p-5" type="submit" value="Register Now">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- hero area end -->
+
+    <!-- about area start -->
+    <div class="about-area-style2 ptb--120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="about-content-style2 text-center has-color">
+                        <div class="section-title-style mb-4">
+                            <h2>Welcome to <b class="line-break"></b><span class="text-color">Edification</span> University</h2>
+                        </div>
+                        <p class="text-white-70">Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                        <a class="btn btn-light btn-round mt-3" href="#">Read more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about area end -->
+
+    <!-- course area start -->
+    <div class="course-area  ptb--120">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="section-title-style2 black-title title-tb text-center">
+                        <span>build your career</span>
+                        <h2 class="primary-color">Featured Courses</h2>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <!-- course area end -->
+
+    <!-- take toure area start -->
+    <!-- take toure area end -->
+
+    <!-- course area start -->
+    <!-- course area end -->
+
+    <!-- events area start -->
+    <div class="event-area  pt--120 pb--80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="section-title-style2 black-title text-center">
+                        <span>Join with us</span>
+                        <h2>Upcoming Events</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="media align-items-center mb-5">
+                        <div class="media-head primary-bg">
+                            <span><sub>MAR</sub>25</span>
+                            <p>2018</p>
+                        </div>
+                        <div class="media-body">
+                            <h4><a href="#">Affiliate Marketing</a></h4>
+                            <p><i class="fa fa-clock-o"></i>05:23 AM - 09:23 AM</p>
+                        </div>
+                    </div> <!-- media -->
+                </div><!-- col-md-6 -->
+                <div class="col-md-6">
+                    <div class="media align-items-center mb-5">
+                        <div class="media-head primary-bg">
+                            <span><sub>OCT</sub>25</span>
+                            <p>2018</p>
+                        </div>
+                        <div class="media-body">
+                            <h4><a href="#">Facebook Marketing</a></h4>
+                            <p><i class="fa fa-clock-o"></i>05:23 AM - 09:23 AM</p>
+                        </div>
+                    </div> <!-- media -->
+                </div><!-- col-md-6 --> 
+                <div class="col-md-6">
+                    <div class="media align-items-center mb-5">
+                        <div class="media-head primary-bg">
+                            <span><sub>NOV</sub>25</span>
+                            <p>2018</p>
+                        </div>
+                        <div class="media-body">
+                            <h4><a href="#">Edustar Autumn</a></h4>
+                            <p><i class="fa fa-clock-o"></i>05:23 AM - 09:23 AM</p>
+                        </div>
+                    </div> <!-- media -->
+                </div><!-- col-md-6 -->  
+                <div class="col-md-6">
+                    <div class="media align-items-center mb-5">
+                        <div class="media-head primary-bg">
+                            <span><sub>DEC</sub>25</span>
+                            <p>2018</p>
+                        </div>
+                        <div class="media-body">
+                            <h4><a href="#">Workshop PHP</a></h4>
+                            <p><i class="fa fa-clock-o"></i>05:23 AM - 09:23 AM</p>
+                        </div>
+                    </div> <!-- media -->
+                </div><!-- col-md-6 -->   
+            </div><!-- row -->
+        </div><!-- container -->
+    </div>
+    <!-- events area end --> 
+    
+    <div class="testimonial-area ptb--120"><!-- testimonial area start -->
+        <img class="tst-bg" src="{% static 'ScholarLink/assets/images/bg/tst-bg-shape.png' %}" alt="image">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 text-center">
+                    <div class="tst-carousel owl-carousel">
+                        <div class="testimonial-content pb--40">
+                            <div class="section-title sec-style-two">
+                                <span class="text-uppercase primary-color mb-0">Happy students</span>
+                                <h2>Testimonial</h2>
+                            </div>
+                            <h3>‘‘ Vous devez profiter de la vie. Toujours aimez, les personnespositives penser. ‘‘</h3>
+                            <h4>Kawsar Ahhamed</h4>
+                            <span>App Developer</span>
+                        </div>  
+                        <div class="testimonial-content pb--40">
+                            <div class="section-title sec-style-two">
+                                <span class="text-uppercase primary-color mb-0">Happy students</span>
+                                <h2>Testimonial</h2>
+                            </div>
+                            <h3>‘‘ Vous devez profiter de la vie. Toujours aimez, les personnespositives penser. ‘‘</h3>
+                            <h4>Kawsar Ahhamed</h4>
+                            <span>App Developer</span>
+                        </div>  
+                        <div class="testimonial-content pb--40">
+                            <div class="section-title sec-style-two">
+                                <span class="text-uppercase primary-color mb-0">Happy students </span>
+                                <h2>Testimonial</h2>
+                            </div>
+                            <h3>‘‘ Vous devez profiter de la vie. Toujours aimez, les personnespositives penser. ‘‘</h3>
+                            <h4>Kawsar Ahhamed</h4>
+                            <span>App Developer</span>
+                        </div> 
+                    </div>
+                </div><!-- row -->
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- testimonial-area --> 
+
+    <!-- blog area start -->
+    <div class="feature-blog  ptb--120">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="section-title-style2 black-title title-tb text-center">
+                        <span>Top stories</span>
+                        <h2>Blog & News</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="blog-carousel owl-carousel card-deck">                     
+                  <div class="card mb-5"> 
+                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail1.jpg' %}" alt="image">
+                    <div class="card-body p-25"> 
+                        <ul class="list-inline primary-color mb-3">
+                            <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
+                            <li><i class="fa fa-comments"></i> 3 Comments</li>
+                        </ul>
+                      <h4 class="card-title mb-4"><a href="blog.html">The Death Of architechture</a></h4>
+                      <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
+                      <a class="btn btn-primary btn-round btn-sm" href="blog-details.html"> Read More </a>
+                    </div>
+                  </div><!-- card -->                
+                  <div class="card mb-5"> 
+                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail2.jpg' %}" alt="image">
+                    <div class="card-body p-25"> 
+                        <ul class="list-inline primary-color mb-3">
+                            <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
+                            <li><i class="fa fa-comments"></i> 3 Comments</li>
+                        </ul>
+                      <h4 class="card-title mb-4"><a href="blog.html">Aenean id ullamcorper</a></h4>
+                      <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
+                      <a class="btn btn-primary btn-round btn-sm" href="blog-details.html"> Read More </a>
+                    </div>
+                  </div><!-- card -->
+       
+                  <div class="card mb-5"> 
+                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail3.jpg' %}" alt="image">
+                    <div class="card-body p-25"> 
+                        <ul class="list-inline primary-color mb-3">
+                            <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
+                            <li><i class="fa fa-comments"></i> 3 Comments</li>
+                        </ul>
+                      <h4 class="card-title mb-4"><a href="blog.html">The Death Of architechture</a></h4>
+                      <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
+                      <a class="btn btn-primary btn-round btn-sm" href="blog-details.html"> Read More </a>
+                    </div>
+                  </div><!-- card -->         
+                  <div class="card mb-5"> 
+                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail1.jpg' %}" alt="image">
+                    <div class="card-body p-25"> 
+                        <ul class="list-inline primary-color mb-3">
+                            <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
+                            <li><i class="fa fa-comments"></i> 3 Comments</li>
+                        </ul>
+                      <h4 class="card-title mb-4"><a href="blog.html">The Death Of architechture</a></h4>
+                      <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
+                      <a class="btn btn-primary btn-round btn-sm" href="blog-details.html"> Read More </a>
+                    </div>
+                  </div><!-- card -->    
+                </div><!-- blog-carousel -->
+            </div><!-- blog-carousel -->
+
+        </div>
+    </div> <!-- blog area end -->
+
+    <!-- cta area start -->
+    <div class="cta-area secondary-bg has-color cta-area ptb--50 "> 
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-9">
+                    <div class="cta-content">
+                        <p class="mb-2">Click to Join the Advance Workshop</p>
+                        <h2>Training in advance networking</h2>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="cta-btn">
+                        <a class="btn btn-light btn-round" href="#">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- cta area end -->
+
+    <!-- footer area start -->
+    <footer>
+        <div class="footer-top  has-color pt--120 pb--30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="widget widget-company">
+                            <a href="login.html"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="image"></a>
+                            <div class="address">
+                                <h6>Office Address</h6>
+                                <p>London Oxford Street, 012 United Kingdom.</p>
+                            </div>
+                            <div class="address">
+                                <h6>Business Phone</h6>
+                                <p>+012 3456 7890</p>
+                            </div>
+                            <div class="address">
+                                <h6>Business Email</h6>
+                                <p>Business@themerocket.net</p>
+                            </div>
+                            <ul class="social">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="widget footer-link">
+                            <h4 class="fwidget-title mb-5 pb-3 primary-color">Footer Menu</h4> 
+                            <ul>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Case Studies</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>About Us</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Our Story</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Blog Post</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Work with Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="widget widget-opening">
+                            <h4 class="fwidget-title mb-5 pb-3 primary-color">Working Day & time</h4>
+                            <p>Architecto beatae vitae dicta sunt ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
+                            <ul>
+                                <li><span>Mon - Tus :</span>6.00 am - 10.00 pm</li>
+                                <li><span>Wed - Tur :</span>8.00 am - 6.00 pm</li>
+                                <li><span>Friday :</span>3.00 pm - 8.00 pm</li>
+                                <li><span>Sunday :</span>Closed</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>Copyright © 2019 <span><a class="primary-color" href="https://themeforest.net/user/pixelthemez/portfolio" target="_blank">Edification</a> </span> - All Rights Reserved. Made by <span><a class="primary-color" href="https://furioustheme.com/" target="_blank">Furioustheme</a></span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer area end -->
+ 
+    <!-- jquery latest version -->
+    <script src="{% static 'ScholarLink/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
+    <!-- bootstrap 4 js -->
+    <script src="{% static 'ScholarLink/assets/js/bootstrap.min.js' %}"></script>
+    <!-- others plugins -->
+    <script src="{% static 'ScholarLink/assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/plugins.js' %}"></script>
+    <script src="{% static 'ScholarLink/assets/js/scripts.js' %}"></script>
+</body>
+
+</html>
