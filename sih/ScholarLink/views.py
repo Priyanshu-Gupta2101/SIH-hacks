@@ -81,8 +81,9 @@ def student(request):
         personal_detail = PersonalDetail.objects.get(user=request.user)
         contact_detail = ContactDetail.objects.get(user=request.user)
         guardian_detail = GuardianDetail.objects.get(user=request.user)
+        file_detail = FileDetail.objects.get(user=request.user) 
 
-        student = Student(student=request.user, personal_detail=personal_detail, contact_detail=contact_detail, guardian_detail=guardian_detail)
+        student = Student(student=request.user, personal_detail=personal_detail, contact_detail=contact_detail, guardian_detail=guardian_detail, file_detail=file_detail)
         student.save()
         return HttpResponse(status=204)
     else:    
@@ -93,19 +94,22 @@ def personal_detail(request):
     if request.method == 'PUT':
         data = json.loads(request.body)
 
-        full_name = data.get('full_name')
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
         enrol_no = data.get('enrol_no')
+        dob = data.get('dob')
 
         if PersonalDetail.objects.filter(user=request.user):
             personal_detail = PersonalDetail.objects.get(user=request.user)
-            personal_detail.full_name=full_name
+            personal_detail.first_name=first_name
+            personal_detail.last_name=last_name
             personal_detail.enrollment_number=enrol_no
+            personal_detail.date_of_birth=dob
             personal_detail.save()
         else:
-            personal_detail = PersonalDetail(user=request.user, full_name=full_name, enrollment_number=enrol_no)
+            personal_detail = PersonalDetail(
+                user=request.user, first_name=first_name, last_name=last_name, enrollment_number=enrol_no, date_of_birth=dob)
             personal_detail.save()
-
-        print(data)
 
         return HttpResponse(status=204)     
 
@@ -115,17 +119,27 @@ def contact_detail(request):
 
         email = data.get('email')
         phone_no = data.get('phone_no')
+        address = data.get('address')
+        city = data.get('city')
+        state = data.get('state')
+        pincode = data.get('pincode')
+        country = data.get('country')
+
 
         if ContactDetail.objects.filter(user=request.user):
             contact_detail = ContactDetail.objects.get(user=request.user)
             contact_detail.contact_email=email
             contact_detail.contact_phone=phone_no
+            contact_detail.address=address
+            contact_detail.city=city
+            contact_detail.state=state
+            contact_detail.pincode=pincode
+            contact_detail.country=country
             contact_detail.save()
         else:
-            contact_detail = ContactDetail(user=request.user, contact_email=email, contact_phone=phone_no)
+            contact_detail = ContactDetail(user=request.user, contact_email=email, contact_phone=phone_no, address=address, city=city, state=state, pincode=pincode, country=country)
             contact_detail.save()
 
-        print(data)
         return HttpResponse(status=204)  
 
 
@@ -135,18 +149,48 @@ def guardian_detail(request):
 
         guardian_name = data.get('guardian_name')
         guardian_phone = data.get('guardian_no')
+        guardian_email = data.get('guardian_email')
+        guardian_gender = data.get('guardian_gender')
 
         if GuardianDetail.objects.filter(user=request.user):
             guardian_detail = GuardianDetail.objects.get(user=request.user)
             guardian_detail.guardian_name = guardian_name
             guardian_detail.guardian_phone = guardian_phone
+            guardian_detail.guardian_email = guardian_email
+            guardian_detail.guardian_gender = guardian_gender
             guardian_detail.save()
         else:
-            guardian_detail = GuardianDetail(user=request.user, guardian_name=guardian_name, guardian_phone=guardian_phone)
+            guardian_detail = GuardianDetail(
+                user=request.user, guardian_name=guardian_name, guardian_phone=guardian_phone, guardian_email=guardian_email, guardian_gender=guardian_gender)
             guardian_detail.save()
 
-        print(data)
         return HttpResponse(status=204)  
+    
+
+def file_detail(request):
+    if request.method == 'PUT':
+        profile_pic = request.FILES.get('profile_pic')
+        signature = request.FILES.get('signature')
+        aadhaar = request.FILES.get('aadhaar')
+        income_cert = request.FILES.get('income_cert')
+
+        if FileDetail.objects.filter(user=request.user):
+            file_detail = FileDetail.objects.get(user=request.user)
+            file_detail.profile_pic = profile_pic
+            file_detail.signature = signature
+            file_detail.aadhaar = aadhaar
+            if income_cert:
+                file_detail.income_cert = income_cert
+            file_detail.save()
+        else:
+            if income_cert:
+                file_detail = FileDetail(user=request.user, profile_pic=profile_pic, signature=signature, aadhaar=aadhaar, income_cert=income_cert)
+                file_detail.save()
+            else:
+                file_detail = FileDetail(user=request.user, profile_pic=profile_pic, signature=signature, aadhaar=aadhaar)
+                file_detail.save()
+
+        return HttpResponse(status=204)
         
 
 '''
