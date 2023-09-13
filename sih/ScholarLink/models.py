@@ -25,18 +25,17 @@ class AccreditationBody(models.Model):
     def __str__(self):
         return self.name
 
-
 class Scholarship(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     eligibility_criteria = models.TextField()
-    award_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    state_specific = models.BooleanField(default=False)
+    state_name = models.CharField(null = True, max_length=50)
+    # award_amount = models.DecimalField(max_digits=10, decimal_places=2)
     provider = models.CharField(max_length=100)
     website = models.URLField(blank=True, null=True)
     contact_email = models.EmailField()
 
-    def __str__(self):
-        return self.name
 
 
 class InstituteDetail(models.Model):
@@ -71,8 +70,8 @@ class Institution(models.Model):
     contact_detail = models.ForeignKey(ContactDetail, on_delete=models.CASCADE, blank=True, null=True)
     institution_doc = models.ForeignKey(InstituteDoc, on_delete=models.CASCADE, blank=True, null=True)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.user
     
 
 class PersonalDetail(models.Model):
@@ -81,8 +80,6 @@ class PersonalDetail(models.Model):
     last_name = models.CharField(max_length=100)
     enrollment_number = models.CharField(max_length=20, unique=True)
     date_of_birth = models.DateField()
-
-
 
 
 class GuardianDetail(models.Model):
@@ -108,29 +105,32 @@ class Student(models.Model):
     contact_detail = models.ForeignKey(ContactDetail, on_delete=models.CASCADE, blank=True, null=True)
     guardian_detail = models.ForeignKey(GuardianDetail, on_delete=models.CASCADE, blank=True, null=True)
     file_detail = models.ForeignKey(FileDetail, on_delete=models.CASCADE, blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
+    status = models.CharField(max_length=20,default='Pending')
+    reason = models.CharField(max_length=100, null = True)
     last_updated = models.DateTimeField(auto_now=True)
-
+    
     def __str__(self):
         return f"{self.student.username}'s Profile with {self.personal_detail.enrollment_number}"
 
 
+class Applications(models.Model):
+    student = models.OneToOneField(User, on_delete=models.CASCADE)
+    # list_of_applied = 
 
+# class VerificationStatus(models.Model):
+#     student = models.OneToOneField(User, on_delete=models.CASCADE)
+#     registration = models.BooleanField(default=False)
+#     applications = models.
+#     is_verified = models.BooleanField(default=False)
+#     status = models.CharField(max_length=20, null = True)
+#     reason = models.CharField(max_length=100, null = True)
+#     last_updated = models.DateTimeField(auto_now=True)
 
-
-
-
-
+#     def __str__(self):
+#         return f"{self.student.first_name}'s Verification Status"
 
 '''
-class VerificationStatus(models.Model):
-    student = models.OneToOneField(Student, on_delete=models.CASCADE)
-    is_verified = models.BooleanField(default=False)
-    last_updated = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.student.full_name}'s Verification Status"
-
-
 class Application(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE)

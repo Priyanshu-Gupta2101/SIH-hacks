@@ -16,6 +16,10 @@ urlpatterns = [
     path('contact_detail/', views.contact_detail, name="contact_detail"),
     path('guardian_detail/', views.guardian_detail, name="guardian_detail"),
     path('file_detail/', views.file_detail, name="file_detail"),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('student_profile/', views.student_profile_dashboard, name='student_profile_dashboard'),
+    path('applications/', views.applications, name='applications'),
+
 ]
 
 if settings.DEBUG:
