@@ -1,13 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   outline: none;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
@@ -16,7 +20,7 @@ body {
 
 ::selection {
   color: #fff;
-  background: #FC9928;
+  background: #fc9928;
 }
 
 nav {
@@ -63,7 +67,7 @@ nav.sticky .logo a {
 
 .nav-links li a {
   text-decoration: none;
-  color: #0E2431;
+  color: #0e2431;
   font-size: 18px;
   font-weight: 500;
   padding: 10px 4px;
@@ -80,7 +84,7 @@ nav.sticky .nav-links li a {
 }
 
 nav.sticky .nav-links li a:hover {
-  color: #0E2431;
+  color: #0e2431;
 }
 
 .container {
@@ -151,7 +155,7 @@ form .page .field button {
   width: 100%;
   height: calc(100% + 5px);
   border: none;
-  background: #FC9928;
+  background: #fc9928;
   margin-top: -20px;
   border-radius: 5px;
   color: #fff;
@@ -206,7 +210,7 @@ form .page .field .submit {
   width: 100%;
   height: calc(100% + 5px);
   border: none;
-  background: #FC9928;
+  background: #fc9928;
   margin-top: -20px;
   border-radius: 5px;
   color: #fff;
@@ -238,8 +242,8 @@ form .page .field .submit:hover {
 }
 
 .progress-bar .step .bullet.active {
-  border-color: #FC9928;
-  background: #FC9928;
+  border-color: #fc9928;
+  background: #fc9928;
 }
 
 .progress-bar .step .bullet span {
@@ -260,7 +264,7 @@ form .page .field .submit:hover {
 .progress-bar .step .bullet:before,
 .progress-bar .step .bullet:after {
   position: absolute;
-  content: '';
+  content: "";
   bottom: 11px;
   right: -51px;
   height: 3px;
@@ -269,7 +273,7 @@ form .page .field .submit:hover {
 }
 
 .progress-bar .step .bullet.active:after {
-  background: #FC9928;
+  background: #fc9928;
   transform: scaleX(0);
   transform-origin: left;
   animation: animate 0.3s linear forwards;

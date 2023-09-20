@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Edification - Responsive Education HTML5 Template</title>
+    <title>ScholarVerify - Responsive Education HTML5 Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/png" href="{% static 'ScholarLink/assets/images/icon/favicon.ico' %}">
@@ -23,6 +23,7 @@
     <!--color css-->
     <link rel="stylesheet" id="triggerColor" href="{% static 'ScholarLink/assets/css/triggerplate/color-0.css' %}">
     <!-- modernizr css -->
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/footer.css'%}"/>
     <script src="{% static 'ScholarLink/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
 </head>
 
@@ -54,7 +55,6 @@
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                             </ul>
                         </div>
@@ -70,51 +70,29 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-sm-9">
                             <div class="logo">
-                                <a href="index.html"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="logo"></a>
+                                <a href="{% url 'index' %}"><img src='{% static "ScholarLink/assets/images/icon/logo-middle.png" %}' alt="logo"></a>
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                             <div class="main-menu">
                                 <nav>
                                     <ul id="m_menu_active">
-                                        <li><a href="javascript:void(0);">Home</a>
-                                            <ul class="submenu">
-                                                <li><a href="index.html">Home One</a></li>
-                                                <li><a href="index2.html">Home Two</a></li>
-                                                <li><a href="index3.html">Home Three</a></li>
-                                            </ul>
+                                        <li><a href="{% url 'index' %}">Home</a>
                                         </li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="javascript:void(0);">Courses</a>
-                                            <ul class="submenu">
-                                                <li><a href="courses.html">courses</a></li>
-                                                <li><a href="course-details.html">course details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="javascript:void(0);">teacher</a>
-                                            <ul class="submenu">
-                                                <li><a href="teachers.html">teachers</a></li>
-                                                <li><a href="teacher-details.html">teacher details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="javascript:void(0);">blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">blog</a></li>
-                                                <li><a href="blog-details.html">blog details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="active"><a href="contact.html">Contact</a></li>
+                                        <li><a href="{% url 'about' %}">About</a></li>
+                                        <li><a href="javascript:void(0);">Dashboard</a>
+                                        <li class="active"><a href="{% url 'contact' %}">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-xl-1 col-lg-2 col-sm-3">
+                        <!-- <div class="col-xl-1 col-lg-2 col-sm-3">
                             <div class="hb-right">
                                 <ul> 
                                     <li class="search_btn"><i class="fa fa-search"></i></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-12 d-block d-lg-none">
                             <div id="mobile_menu"></div>
                         </div>
@@ -150,41 +128,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="cnt-info">
-                        <h4>Contact Info</h4>
-                        <p>PO Box CT16133 Collins Street West, Victoria 8007, Australia.</p>
-                        <ul class="address">
-                            <li><i class="fa fa-phone"></i>+1 (2) 345 6789</li>
-                            <li><i class="fa fa-phone"></i>+1 (2) 345 6789</li>
-                            <li><i class="fa fa-envelope"></i>contact@yourdomain.com</li>
-                        </ul>
-                        <ul class="social list-inline mt-5">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div id="google-map"></div>
                 </div>
             </div>
         </div>
     </div>
     <!-- contact info area end -->
     <!-- contact form area start -->
-    <div class="contact-form-area pb--120">
+    <div class="contact-form-area pb--120" style="margin-top: -60px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <div class="cnt-title">
                         <h4>Get in touch <span>with us</span></h4>
-                        <p>Quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut </p>
+                        <p style="color: black;">We welcome your inquiries and appreciate your interest in contacting
+                            us. If you have any
+                            questions, require assistance, or wish to discuss any matter with our team, please do not
+                            hesitate to reach out. You may use the contact form provided below or contact us via the
+                            details listed. We value your communication and are committed to providing prompt and
+                            helpful responses. Thank you for considering us as your point of contact." </p>
                     </div>
                 </div>
             </div>
@@ -211,83 +172,83 @@
             </div>
         </div>
     </div>
-    <!-- contact form area end --> 
+    <!-- contact form area end -->
 
     <!-- footer area start -->
     <footer>
-        <div class="footer-top has-color pt--120 pb--30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="widget widget-company">
-                            <a href="index.html"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="image"></a>
-                            <div class="address">
-                                <h6>OFFICE ADDRESS</h6>
-                                <p>London Oxford Street, 012 United Kingdom.</p>
-                            </div>
-                            <div class="address">
-                                <h6>BUSINESS PHONE</h6>
-                                <p>+012 3456 7890</p>
-                            </div>
-                            <div class="address">
-                                <h6>BUSINESS EMAIL</h6>
-                                <p>Business@themerocket.net</p>
-                            </div>
-                            <ul class="social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="widget footer-link">
-                            <h4 class="fwidget-title mb-5 pb-3 primary-color">Footer Menu</h4> 
-                            <ul>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>Case Studies</a></li>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>About Us</a></li>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>Our Story</a></li>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>Blog Post</a></li>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>Work with Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="widget widget-opening">
-                            <h4 class="fwidget-title mb-5 pb-3 primary-color">Working Day & time</h4>
-                            <p>Architecto beatae vitae dicta sunt ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
-                            <ul>
-                                <li><span>Mon - Tus :</span>6.00 am - 10.00 pm</li>
-                                <li><span>Wed - Tur :</span>8.00 am - 6.00 pm</li>
-                                <li><span>Friday :</span>3.00 pm - 8.00 pm</li>
-                                <li><span>Sunday :</span>Closed</li>
-                            </ul>
-                        </div>
+        <div class="main-content">
+            <div class="left box">
+                <h2 style="color: white;">About us</h2>
+                <div class="content">
+                    <p>ScholarVerify, your trusted platform, bridges the gap for students studying in different states.
+                    </p>
+                    <div class="social">
+                        <a href="https://facebook.com/coding.np"><span class="fab fa-facebook-f"></span></a>
+                        <a href="#"><span class="fab fa-twitter"></span></a>
+                        <a href="https://instagram.com/coding.np"><span class="fab fa-instagram"></span></a>
+                        <a href="https://youtube.com/c/codingnepal"><span class="fab fa-youtube"></span></a>
                     </div>
                 </div>
-                <div class="footer-bottom">
-                    <p>Copyright © 2022 <span><a class="primary-color" href="https://themeforest.net/user/pixelthemez/portfolio" target="_blank">Edification</a> </span> - All Rights Reserved. Made by <span><a class="primary-color" href="https://furioustheme.com/" target="_blank">Furioustheme</a></span></p>
+            </div>
+            <div class="center box">
+                <h2 style="color: white;">Address</h2>
+                <div class="content">
+                    <div class="place">
+                        <span class="fas fa-map-marker-alt"></span>
+                        <span class="text">Birendranagar, Surkhet</span>
+                    </div>
+                    <div class="phone">
+                        <span class="fas fa-phone-alt"></span>
+                        <span class="text">+089-765432100</span>
+                    </div>
+                    <div class="email">
+                        <span class="fas fa-envelope"></span>
+                        <span class="text">abc@example.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="right box">
+                <h2 style="color: white;">Contact us</h2>
+                <div class="content">
+                    <form action="#">
+                        <div class="email">
+                            <div class="text">Email *</div>
+                            <input type="email" required>
+                        </div>
+                        <div class="msg">
+                            <div class="text">Message *</div>
+                            <textarea rows="2" cols="25" required></textarea>
+                        </div>
+                        <div class="btn">
+                            <button type="submit">Send</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        <div class="bottom">
+            <center>
+                <span class="credit">Created By <a href="https://www.codingnepalweb.com">Scholar Verify</a> | </span>
+                <span class="far fa-copyright"></span><span> 2020 All rights reserved.</span>
+            </center>
+        </div>
     </footer>
     <!-- footer area end -->
- 
+
 
     <!-- jquery latest version -->
-    <script src="{% static 'ScholarLink/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
+    <script src='{% static "ScholarLink/assets/js/vendor/jquery-2.2.4.min.js" %}'></script>
     <!-- bootstrap 4 js -->
-    <script src="{% static 'ScholarLink/assets/js/bootstrap.min.js' %}"></script>
+    <script src='{% static "ScholarLink/assets/js/bootstrap.min.js" %}'></script>
     <!-- others plugins -->
-    <script src="{% static 'ScholarLink/assets/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'ScholarLink/assets/js/jquery.magnific-popup.min.js' %}"></script>
-    <script src="{% static 'ScholarLink/assets/js/jquery.slicknav.min.js' %}"></script>
-    <script src="{% static 'ScholarLink/assets/js/plugins.js' %}"></script>
+    <script src='{% static "ScholarLink/assets/js/owl.carousel.min.js" %}'></script>
+    <script src='{% static "ScholarLink/assets/js/jquery.magnific-popup.min.js" %}'></script>
+    <script src='{% static "ScholarLink/assets/js/jquery.slicknav.min.js" %}'></script>
+    <script src='{% static "ScholarLink/assets/js/plugins.js" %}'></script>
     <!-- google map -->
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsUcTjt43mTheN9ruCsQVgBE-wgN6_AfY&#038"></script>
-    <script src="{% static 'ScholarLink/assets/js/google-maps.js' %}"></script>
-    <script src="{% static 'ScholarLink/assets/js/scripts.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsUcTjt43mTheN9ruCsQVgBE-wgN6_AfY&#038"></script>
+    <script src='{% static "ScholarLink/assets/js/google-maps.js" %}'></script>
+    <script src='{% static "ScholarLink/assets/js/scripts.js" %}'></script>
 </body>
 
 </html>

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Edification - Responsive Education HTML5 Template</title>
+    <title>ScholarVerify - Responsive Education HTML5 Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/png" href="{% static 'ScholarLink/assets/images/icon/favicon.ico' %}">
@@ -24,6 +24,7 @@
     <link rel="stylesheet" id="triggerColor" href="{% static 'ScholarLink/assets/css/triggerplate/color-0.css' %}">
     <!-- modernizr css -->
     <script src="{% static 'ScholarLink/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/footer.css' %}">
 </head>
 
 <body>
@@ -31,7 +32,7 @@
         <div class="loader"></div>
     </div>
     <!-- prealoader area end -->
-    
+
     <!-- header area start -->
     <header id="header">
         <!-- header two area start -->
@@ -40,23 +41,24 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-sm-6 d-block d-lg-none">
                         <div class="logo">
-                            <a href="login.html"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="logo"></a>
+                            <a href="{% url 'index' %}"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-lg-9 offset-lg-1 d-none d-lg-block">
                         <div class="main-menu menu-style2">
                             <nav>
                                 <ul id="m_menu_active">
-                                    <li class="active"><a href="login.html">Home</a>
+                                    <li class="active"><a href="{% url 'index' %}">Home</a>
                                     </li>
                                     <li><a href="{% url 'about' %}">About</a></li>
                                     <li class="middle-logo">
-                                        <a href="login.html">
+                                        <a href="{% url 'index' %}">
                                             <img src="{% static 'ScholarLink/assets/images/icon/logo-middle.png' %}" alt="logo">
-                                            <img class="hb-bottom-shape" src="{% static 'ScholarLink/assets/images/icon/hb-bottom-shape.png' %}" alt="logo">
+                                            <img class="hb-bottom-shape" src="{% static 'ScholarLink/assets/images/icon/hb-bottom-shape.png' %}"
+                                                alt="logo">
                                         </a>
                                     </li>
-                                    <li><a href="#">Events</a></li>
+                                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                                     <li><a href="{% url 'contact' %}">Contact</a></li>
                                 </ul>
                             </nav>
@@ -64,28 +66,31 @@
                     </div>
                     <div class="col-lg-2 col-sm-5">
                         <div class="header-bottom-right-style-2">
+                            {% if request.GET.message == 'success' %}
                             <ul>
-                                {% if user.is_authenticated %}
-                                <li><a class="btn btn-primary btn-round" class="active" href="{% url 'logout' %}">Log out</a></li>
-                                {% else %}
-                                <li><a class="btn btn-light btn-round" href="{% url 'login' %}">Log in</a></li>
-                                <li><a class="btn btn-primary btn-round" class="active" href="{% url 'register' %}">Sign Up</a></li>
-                                {% endif %}
+                                <li><a class="btn btn-light btn-round" href="{% url 'logout' %}">Logout</a></li>
                             </ul>
+                            {% else %}
+                            <ul>
+                                <li><a class="btn btn-light btn-round" href="{% url 'login' %}">Log in</a></li>
+                                <li><a class="btn btn-primary btn-round" class="active" href="{% url 'register' %}">Sign Up</a>
+                                </li>
+                            </ul>
+                            {% endif %}
                         </div>
-                    <div class="col-12 d-block d-lg-none">
-                        <div id="mobile_menu"></div>
+                        <div class="col-12 d-block d-lg-none">
+                            <div id="mobile_menu"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- header two area end -->
+            <!-- header two area end -->
     </header>
     <!-- header area end -->
     <!-- offset search area start -->
     <div class="offset-search">
         <form action="#">
-            <input type="text" name="search" placeholder="Search here...">
+            <input type="text" name="search" placeholder="Sarch here...">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
@@ -95,28 +100,24 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="hero-content">
-                        <h3>Admission'20</h3>
-                        <h1 class="mb-5"><span class="primary-color">Build your Successful</span><b class="line-break"></b>Future with Edification</h1>
-                        <p class="text-white-50">Find Your Preferred Courses & Improve Your Skills</p>
-
-                        {% if not student and not institute %}
-                        <form action="{% url 'student' %}">
+                        <h3>ScholarShips</h3>
+                        <h1 class="mb-5"><span class="primary-color">Build your Successful</span><b
+                                class="line-break"></b>Future with ScholarVerify</h1>
+                        <p class="text-white-50">Attain Institution-Level Verification and Access the Scholarships You
+                            Truly Deserve</p>
+                        <form action="#">
                             <div class="form-input ">
                                 <br><br>
-                                <input class="btn btn-primary btn-sm p-5" type="submit" value="Register Now">
-                                <i class="fa fa-search"></i>
+                                <div class="buttons" style="display: flex; justify-content: space-between;">
+                                    <a class="btn btn-primary btn-sm p-4 " href="{% url 'student' %}"
+                                        style="border-radius: 25px; margin-top: 20px; margin-right:30px;">Student
+                                        Register</a>
+                                    <a class="btn btn-primary btn-sm p-4" href="{% url 'institution' %}"
+                                        style="border-radius: 25px; margin-top: 20px;">Institute Regsiter</a>
+                                </div>
                             </div>
-                        </form>
-                        <br>
-                        <form action="{% url 'institution' %}">
-                            <div class="form-input ">
-                                <br><br>
-                                <input class="btn btn-primary btn-sm p-5" type="submit" value="Institution Register">
-                                <i class="fa fa-search"></i>
-                            </div>
-                        </form>
-                        {% endif %}
 
+                        </form>
                     </div>
                 </div>
             </div>
@@ -125,16 +126,23 @@
     <!-- hero area end -->
 
     <!-- about area start -->
+    <br>
+    <br>
+    <br>
     <div class="about-area-style2 ptb--120">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="about-content-style2 text-center has-color">
                         <div class="section-title-style mb-4">
-                            <h2>Welcome to <b class="line-break"></b><span class="text-color">Edification</span> University</h2>
+                            <h2>Welcome to <b class="line-break"></b><span class="text-color">ScholarVerify</span></h2>
                         </div>
-                        <p class="text-white-70">Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                        <a class="btn btn-light btn-round mt-3" href="#">Read more</a>
+                        <p class="text-white-70">
+                            ScholarVerify, your trusted platform, bridges the gap for students studying in different
+                            states. Our institution-level verification is designed with your needs in mind. We ensure
+                            that you receive scholarship benefits, even if your institution isn't registered in your
+                            home state's portal. Count on us for a seamless and equitable education journey. Welcome to
+                            ScholarVerify where opportunities know no borders.</p>
                     </div>
                 </div>
             </div>
@@ -143,16 +151,48 @@
     <!-- about area end -->
 
     <!-- course area start -->
-    <div class="course-area  ptb--120">
+    <br>
+    <br>
+    <br>
+    <div class="course-area  ptb--120" style="background-color: #f5ebe0;">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <div class="section-title-style2 black-title title-tb text-center">
-                        <span>build your career</span>
-                        <h2 class="primary-color">Featured Courses</h2>
+                        <h2 class="primary-color " style="margin-top:-40px ;">Services Offered</h2>
+                        <div>
+                            <h3 style="margin-top: 50px; color: #14213d;">Scholarship Listing</h3>
+                            <p style="color: #1b263b;">We maintain an up-to-date database of scholarships from various
+                                sources, including
+                                government programs, private organizations, and educational institutions. These
+                                scholarships cover a wide range of fields, disciplines, and eligibility criteria.
+                                Users can search scholarships based on their specific needs and
+                                qualifications.</p>
+                        </div>
+                        <div>
+                            <h3 style="margin-top: 50px; color: #14213d;"> Application Process</h3>
+                            <p style="color: #1b263b;">We offer step-by-step guidance on the application process for
+                                each scholarship. This includes
+                                details on required documents, deadlines, and submission procedures. We aim to make the
+                                application process as straightforward as possible, reducing the burden on students.</p>
+                        </div>
+                        <div>
+                            <h3 style="margin-top: 50px; color: #14213d;"> Deadline Reminders</h3>
+                            <p style="color: #1b263b;">To ensure that students never miss an important scholarship
+                                deadline, we offer deadline reminders. Users can opt to receive email or SMS
+                                notifications well in advance of the application closing dates, helping them stay
+                                organized and on track.</p>
+                        </div>
+                        <div>
+                            <h3 style="margin-top: 50px; color: #14213d;"> User Support</h3>
+                            <p style="color: #1b263b;">Our dedicated support team is available to assist students with
+                                any questions or concerns related to scholarships. Whether it's clarifying eligibility
+                                requirements or troubleshooting application issues, we are here to provide prompt and
+                                helpful assistance through our FAQ section</p>
+                        </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
     <!-- course area end -->
@@ -163,73 +203,12 @@
     <!-- course area start -->
     <!-- course area end -->
 
-    <!-- events area start -->
-    <div class="event-area  pt--120 pb--80">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <div class="section-title-style2 black-title text-center">
-                        <span>Join with us</span>
-                        <h2>Upcoming Events</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="media align-items-center mb-5">
-                        <div class="media-head primary-bg">
-                            <span><sub>MAR</sub>25</span>
-                            <p>2018</p>
-                        </div>
-                        <div class="media-body">
-                            <h4><a href="#">Affiliate Marketing</a></h4>
-                            <p><i class="fa fa-clock-o"></i>05:23 AM - 09:23 AM</p>
-                        </div>
-                    </div> <!-- media -->
-                </div><!-- col-md-6 -->
-                <div class="col-md-6">
-                    <div class="media align-items-center mb-5">
-                        <div class="media-head primary-bg">
-                            <span><sub>OCT</sub>25</span>
-                            <p>2018</p>
-                        </div>
-                        <div class="media-body">
-                            <h4><a href="#">Facebook Marketing</a></h4>
-                            <p><i class="fa fa-clock-o"></i>05:23 AM - 09:23 AM</p>
-                        </div>
-                    </div> <!-- media -->
-                </div><!-- col-md-6 --> 
-                <div class="col-md-6">
-                    <div class="media align-items-center mb-5">
-                        <div class="media-head primary-bg">
-                            <span><sub>NOV</sub>25</span>
-                            <p>2018</p>
-                        </div>
-                        <div class="media-body">
-                            <h4><a href="#">Edustar Autumn</a></h4>
-                            <p><i class="fa fa-clock-o"></i>05:23 AM - 09:23 AM</p>
-                        </div>
-                    </div> <!-- media -->
-                </div><!-- col-md-6 -->  
-                <div class="col-md-6">
-                    <div class="media align-items-center mb-5">
-                        <div class="media-head primary-bg">
-                            <span><sub>DEC</sub>25</span>
-                            <p>2018</p>
-                        </div>
-                        <div class="media-body">
-                            <h4><a href="#">Workshop PHP</a></h4>
-                            <p><i class="fa fa-clock-o"></i>05:23 AM - 09:23 AM</p>
-                        </div>
-                    </div> <!-- media -->
-                </div><!-- col-md-6 -->   
-            </div><!-- row -->
-        </div><!-- container -->
-    </div>
-    <!-- events area end --> 
-    
+    <br>
+    <br>
+    <br>
+
     <div class="testimonial-area ptb--120"><!-- testimonial area start -->
-        <img class="tst-bg" src="{% static 'ScholarLink/assets/images/bg/tst-bg-shape.png' %}" alt="image">
+        <img class="tst-bg" src="{% static 'ScholarLink/assetss/images/bg/tst-bg-shape.png' %}" alt="image">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 text-center">
@@ -239,105 +218,125 @@
                                 <span class="text-uppercase primary-color mb-0">Happy students</span>
                                 <h2>Testimonial</h2>
                             </div>
-                            <h3>‘‘ Vous devez profiter de la vie. Toujours aimez, les personnespositives penser. ‘‘</h3>
-                            <h4>Kawsar Ahhamed</h4>
-                            <span>App Developer</span>
-                        </div>  
+                            <h3>"ScholarVerify has been a game-changer for me. As an out-of-state student, I faced
+                                numerous challenges accessing scholarships. Thanks to ScholarVerify, the process is now
+                                seamless, and I'm receiving the support I need to excel in my studies."</h3>
+                            <h4>-John D</h4>
+                        </div>
                         <div class="testimonial-content pb--40">
                             <div class="section-title sec-style-two">
                                 <span class="text-uppercase primary-color mb-0">Happy students</span>
                                 <h2>Testimonial</h2>
                             </div>
-                            <h3>‘‘ Vous devez profiter de la vie. Toujours aimez, les personnespositives penser. ‘‘</h3>
-                            <h4>Kawsar Ahhamed</h4>
-                            <span>App Developer</span>
-                        </div>  
+                            <h3>"I can't express how thankful I am for ScholarVerify. It's a lifeline for students like
+                                me who study away from home. The platform's institution-level verification made a world
+                                of difference, and I'm finally getting the financial aid I deserve"</h3>
+                            <h4>-Sarah L</h4>
+                        </div>
                         <div class="testimonial-content pb--40">
                             <div class="section-title sec-style-two">
                                 <span class="text-uppercase primary-color mb-0">Happy students </span>
                                 <h2>Testimonial</h2>
                             </div>
-                            <h3>‘‘ Vous devez profiter de la vie. Toujours aimez, les personnespositives penser. ‘‘</h3>
-                            <h4>Kawsar Ahhamed</h4>
-                            <span>App Developer</span>
-                        </div> 
+                            <h3> "ScholarVerify has simplified what used to be a complex and frustrating process. Now, I
+                                can confidently pursue my dreams without worrying about missing out on scholarships.
+                                It's a must-have resource for every student."</h3>
+                            <h4>-Emily M</h4>
+                        </div>
                     </div>
                 </div><!-- row -->
             </div><!-- row -->
         </div><!-- container -->
-    </div><!-- testimonial-area --> 
+    </div>
+    <!-- events area start -->
+    <br>
+    <br>
+    <br>
 
-    <!-- blog area start -->
-    <div class="feature-blog  ptb--120">
+    <div class="event-area  pt--120 pb--80" style="background-color: #f5ebe0; ">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
-                    <div class="section-title-style2 black-title title-tb text-center">
-                        <span>Top stories</span>
-                        <h2>Blog & News</h2>
+                    <div class="section-title-style2 black-title text-center">
+                        <h2 style="margin-top:-100px ; margin-bottom: 30px;" class="primary-color">Our Commitment</h2>
+                        <h5 style="font-family: 'Roboto', sans-serif;">At ScholarVerify, we are committed to ensuring
+                            that no deserving
+                            student is denied
+                            scholarship benefits due to bureaucratic barriers. Our technical solution and dedicated team
+                            are here to support you in your pursuit of higher education, regardless of your location. We
+                            believe that education should be accessible to all, and our mission is to make that a
+                            reality for students studying in different states. Join us in unlocking the doors to
+                            educational opportunities and securing your academic future.</h5>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="blog-carousel owl-carousel card-deck">                     
-                  <div class="card mb-5"> 
-                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail1.jpg' %}" alt="image">
-                    <div class="card-body p-25"> 
-                        <ul class="list-inline primary-color mb-3">
-                            <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
-                            <li><i class="fa fa-comments"></i> 3 Comments</li>
-                        </ul>
-                      <h4 class="card-title mb-4"><a href="blog.html">The Death Of architechture</a></h4>
-                      <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
-                      <a class="btn btn-primary btn-round btn-sm" href="blog-details.html"> Read More </a>
+            <h2 style="margin-left: 25%;">How we address the issue</h2>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body" style="background-color: #ecd8c1;">
+                                <h5 class="card-title " style="font-size: 20px; color: #000000;"">Comprehensive Database</h5>
+                                <p class=" card-text" style="color: #03071e;">We maintain an extensive, constantly
+                                    updated scholarship database. This resource includes scholarships available at the
+                                    institution level and covers a wide spectrum of sources, such as central government
+                                    schemes, state-level programs, private organizations, and educational institutions.
+                                    Whether you're pursuing education in your home state or studying across state lines,
+                                    our platform provides easy access to scholarship information tailored to your
+                                    courses and backgrounds. With our help, you can explore a wealth of opportunities
+                                    and take the first step toward securing your academic future.
+                                    discover the scholarships waiting just for you.</p>
+                            </div>
+                        </div>
                     </div>
-                  </div><!-- card -->                
-                  <div class="card mb-5"> 
-                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail2.jpg' %}" alt="image">
-                    <div class="card-body p-25"> 
-                        <ul class="list-inline primary-color mb-3">
-                            <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
-                            <li><i class="fa fa-comments"></i> 3 Comments</li>
-                        </ul>
-                      <h4 class="card-title mb-4"><a href="blog.html">Aenean id ullamcorper</a></h4>
-                      <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
-                      <a class="btn btn-primary btn-round btn-sm" href="blog-details.html"> Read More </a>
+                    <div class="col-md-4">
+                        <div class="card" style="background-color: #ecd8c1;">
+                            <div class="card-body">
+                                <h5 class="card-title " style="color: #000000;">Cross-State Verification</h5>
+                                <p class="card-text" style="color: #03071e;">Our innovative technical solution
+                                    revolutionizes scholarship
+                                    access for students studying across state lines. Even if your institution isn't
+                                    registered in your home state's portal, we seamlessly verify your enrollment and
+                                    eligibility. Our dedicated team collaborates with educational institutions and
+                                    authorities to expedite the processing of your scholarship applications, ensuring
+                                    that you receive the financial support you deserve. Say goodbye to bureaucratic
+                                    hurdles and hello to hassle-free scholarship benefits with [Website Name]. Your
+                                    academic aspirations are our top priority, regardless of your location. Join us in
+                                    making education accessible to all.</p>
+                            </div>
+                        </div>
                     </div>
-                  </div><!-- card -->
-       
-                  <div class="card mb-5"> 
-                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail3.jpg' %}" alt="image">
-                    <div class="card-body p-25"> 
-                        <ul class="list-inline primary-color mb-3">
-                            <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
-                            <li><i class="fa fa-comments"></i> 3 Comments</li>
-                        </ul>
-                      <h4 class="card-title mb-4"><a href="blog.html">The Death Of architechture</a></h4>
-                      <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
-                      <a class="btn btn-primary btn-round btn-sm" href="blog-details.html"> Read More </a>
+                    <div class="col-md-4">
+                        <div class="card" style="background-color: #ecd8c1;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: #000000;">Advocacy and Support</h5>
+                                <p class="card-text" style="color: #03071e;"> We stand as your advocates, giving the
+                                    rights of students
+                                    pursuing education in different states. Our close collaboration with relevant
+                                    authorities ensures that the scholarship application process is streamlined and
+                                    efficient, reducing bureaucratic roadblocks. Our dedicated support team is your
+                                    trusted ally, ready to address your concerns and provide unwavering assistance at
+                                    every step of your educational journey. With us by your side, you can navigate the
+                                    complexities of scholarship applications with confidence, knowing that your academic
+                                    aspirations are our top priority. Join our community and experience the support you
+                                    deserve as you strive for educational excellence.</p>
+                            </div>
+                        </div>
                     </div>
-                  </div><!-- card -->         
-                  <div class="card mb-5"> 
-                    <img class="card-img-top" src="{% static 'ScholarLink/assets/images/blog/blog-thumbnail1.jpg' %}" alt="image">
-                    <div class="card-body p-25"> 
-                        <ul class="list-inline primary-color mb-3">
-                            <li><i class="fa fa-clock-o"></i> AUGUST 6, 2017</li>
-                            <li><i class="fa fa-comments"></i> 3 Comments</li>
-                        </ul>
-                      <h4 class="card-title mb-4"><a href="blog.html">The Death Of architechture</a></h4>
-                      <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
-                      <a class="btn btn-primary btn-round btn-sm" href="blog-details.html"> Read More </a>
-                    </div>
-                  </div><!-- card -->    
-                </div><!-- blog-carousel -->
-            </div><!-- blog-carousel -->
-
+                </div>
+            </div>
         </div>
-    </div> <!-- blog area end -->
+    </div>
+    <!-- events area end -->
+
+    <!-- testimonial-area -->
+
+    <!-- blog area start -->
+    <!-- blog area end -->
 
     <!-- cta area start -->
-    <div class="cta-area secondary-bg has-color cta-area ptb--50 "> 
+    <!-- <div class="cta-area secondary-bg has-color cta-area ptb--50 ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-9">
@@ -353,66 +352,134 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- cta area end -->
 
     <!-- footer area start -->
-    <footer>
-        <div class="footer-top  has-color pt--120 pb--30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="widget widget-company">
-                            <a href="login.html"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="image"></a>
-                            <div class="address">
-                                <h6>Office Address</h6>
-                                <p>London Oxford Street, 012 United Kingdom.</p>
+    <br>
+    <br>
+    <!-- <footer>
+                <div class="footer-top  has-color pt--120 pb--30">
+                    <div class="container"  style="margin-left: 30%;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="widget widget-company">
+
+                                    <div class="address">
+                                        <h6>Office Address</h6>
+                                        <p>London Oxford Street, 012 United Kingdom.</p>
+                                    </div>
+                                    <div class="address">
+                                        <h6>Business Phone</h6>
+                                        <p>+012 3456 7890</p>
+                                    </div>
+                                    <div class="address">
+                                        <h6>Business Email</h6>
+                                        <p>Business@themerocket.net</p>
+                                    </div> -->
+    <!-- <ul class="social">
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="address">
-                                <h6>Business Phone</h6>
-                                <p>+012 3456 7890</p>
+                            <div class="col-md-3">
+                                <div class="widget footer-link">
+                                    <h4 class="fwidget-title mb-5 pb-3 primary-color">Footer Menu</h4>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i>Case Studies</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i>About Us</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i>Our Story</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i>Blog Post</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i>Work with Us</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="address">
-                                <h6>Business Email</h6>
-                                <p>Business@themerocket.net</p>
+                            <div class="col-md-5">
+                                <div class="widget widget-opening">
+                                    <h4 class="fwidget-title mb-5 pb-3 primary-color">Working Day & time</h4>
+                                    <p>Architecto beatae vitae dicta sunt ipsam voluptatem quia voluptas sit
+                                        aspernatur aut odit
+                                        aut fugit</p>
+                                    <ul>
+                                        <li><span>Mon - Tus :</span>6.00 am - 10.00 pm</li>
+                                        <li><span>Wed - Tur :</span>8.00 am - 6.00 pm</li>
+                                        <li><span>Friday :</span>3.00 pm - 8.00 pm</li>
+                                        <li><span>Sunday :</span>Closed</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <ul class="social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="widget footer-link">
-                            <h4 class="fwidget-title mb-5 pb-3 primary-color">Footer Menu</h4> 
-                            <ul>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Case Studies</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>About Us</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Our Story</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Blog Post</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Work with Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="widget widget-opening">
-                            <h4 class="fwidget-title mb-5 pb-3 primary-color">Working Day & time</h4>
-                            <p>Architecto beatae vitae dicta sunt ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
-                            <ul>
-                                <li><span>Mon - Tus :</span>6.00 am - 10.00 pm</li>
-                                <li><span>Wed - Tur :</span>8.00 am - 6.00 pm</li>
-                                <li><span>Friday :</span>3.00 pm - 8.00 pm</li>
-                                <li><span>Sunday :</span>Closed</li>
-                            </ul>
+                        </div> -->
+    <!-- <div class="footer-bottom">
+                            <p>Copyright © 2019 <span><a class="primary-color"
+                                        href="https://themeforest.net/user/pixelthemez/portfolio"
+                                        target="_blank">Edification</a> </span> - All Rights Reserved. Made by
+                                <span><a class="primary-color" href="https://furioustheme.com/"
+                                        target="_blank">Furioustheme</a></span>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="footer-bottom">
-                    <p>Copyright © 2019 <span><a class="primary-color" href="https://themeforest.net/user/pixelthemez/portfolio" target="_blank">Edification</a> </span> - All Rights Reserved. Made by <span><a class="primary-color" href="https://furioustheme.com/" target="_blank">Furioustheme</a></span></p>
+            </footer> -->
+    <!-- footer area end -->
+    <footer>
+        <div class="main-content">
+            <div class="left box">
+                <h2 style="color: white;">About us</h2>
+                <div class="content">
+                    <p>ScholarVerify, your trusted platform, bridges the gap for students studying in different states.
+                    </p>
+                    <div class="social">
+                        <a href="https://facebook.com/coding.np"><span class="fab fa-facebook-f"></span></a>
+                        <a href="#"><span class="fab fa-twitter"></span></a>
+                        <a href="https://instagram.com/coding.np"><span class="fab fa-instagram"></span></a>
+                        <a href="https://youtube.com/c/codingnepal"><span class="fab fa-youtube"></span></a>
+                    </div>
                 </div>
             </div>
+            <div class="center box">
+                <h2  style="color: white;">Address</h2>
+                <div class="content">
+                    <div class="place">
+                        <span class="fas fa-map-marker-alt"></span>
+                        <span class="text">Birendranagar, Surkhet</span>
+                    </div>
+                    <div class="phone">
+                        <span class="fas fa-phone-alt"></span>
+                        <span class="text">+089-765432100</span>
+                    </div>
+                    <div class="email">
+                        <span class="fas fa-envelope"></span>
+                        <span class="text">abc@example.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="right box">
+                <h2  style="color: white;">Contact us</h2>
+                <div class="content">
+                    <form action="#">
+                        <div class="email">
+                            <div class="text">Email *</div>
+                            <input type="email" required>
+                        </div>
+                        <div class="msg">
+                            <div class="text">Message *</div>
+                            <textarea rows="2" cols="25" required></textarea>
+                        </div>
+                        <div class="btn">
+                            <button type="submit">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <center>
+                <span class="credit">Created By <a href="https://www.codingnepalweb.com">Scholar Verify</a> | </span>
+                <span class="far fa-copyright"></span><span> 2020 All rights reserved.</span>
+            </center>
         </div>
     </footer>
     <!-- footer area end -->

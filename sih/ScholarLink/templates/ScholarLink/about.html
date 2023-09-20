@@ -1,31 +1,79 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Edification - Responsive Education HTML5 Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/png" href="{% static 'ScholarLink/assets/images/icon/favicon.ico' %}">
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'ScholarLink/assets/images/icon/favicon.ico' %}"
+    />
     <!-- all css here -->
-    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/magnific-popup.css' %}">
-    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/slicknav.min.css' %}">
-    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/typography.css' %}">
-    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/default-css.css' %}">
-    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'ScholarLink/assets/css/responsive.css' %}">
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/font-awesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/owl.carousel.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/magnific-popup.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/slicknav.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/typography.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/default-css.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/styles.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/responsive.css' %}"
+    />
     <!--color css-->
-    <link rel="stylesheet" id="triggerColor" href="{% static 'ScholarLink/assets/css/triggerplate/color-0.css' %}">
+    <link
+      rel="stylesheet"
+      id="triggerColor"
+      href="{% static 'ScholarLink/assets/css/triggerplate/color-0.css' %}"
+    />
     <!-- modernizr css -->
     <script src="{% static 'ScholarLink/assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
-</head>
 
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Ops+One&family=Diplomata&family=Fjalla+One&family=Kenia&family=Lobster&family=Oswald:wght@500&family=Poppins:wght@300;400;500;600;700;800;900&family=Righteous&family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <!-- modernizr css -->
+
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="{% static 'ScholarLink/assets/css/footer.css'%}"
+    />
+  </head>
+
+  <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -53,7 +101,6 @@
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                             </ul>
                         </div>
@@ -69,49 +116,28 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-sm-9">
                             <div class="logo">
-                                <a href="{% url 'index' %}"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="logo"></a>
+                                <a href="{% url 'index' %}"><img src='{% static "ScholarLink/assets/images/icon/logo-middle.png" %}' alt="logo"></a>
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-7 d-none d-lg-block">
                             <div class="main-menu">
                                 <nav>
                                     <ul id="m_menu_active">
-                                        <li><a href="javascript:void(0);">Home</a>
-                                            <ul class="submenu">
-                                                <li><a href="{% url 'index' %}">Home One</a></li>
-                                                <li><a href="index2.html">Home Two</a></li>
-                                                <li><a href="index3.html">Home Three</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="{% url 'index' %}">Home</a></li>
                                         <li class="active"><a href="{% url 'about' %}">About</a></li>
-                                        <li><a href="javascript:void(0);">Courses</a>
-                                            <ul class="submenu">
-                                                <li><a href="courses.html">courses</a></li>
-                                                <li><a href="course-details.html">course details</a></li>
-                                            </ul>
+                                        <li><a href="javascript:void(0);">Dashboard</a>
                                         </li>
-                                        <li><a href="javascript:void(0);">teacher</a>
-                                            <ul class="submenu">
-                                                <li><a href="teachers.html">teachers</a></li>
-                                                <li><a href="teacher-details.html">teacher details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="javascript:void(0);">blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">blog</a></li>
-                                                <li><a href="blog-details.html">blog details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
+
+                                        <li><a href="{% url 'contact' %}">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                         <div class="col-xl-1 col-lg-2 col-sm-3">
                             <div class="hb-right">
-                                <ul> 
+                                <!-- <ul> 
                                     <li class="search_btn"><i class="fa fa-search"></i></li>
-                                </ul>
+                                </ul> -->
                             </div>
                         </div>
                         <div class="col-12 d-block d-lg-none">
@@ -125,12 +151,12 @@
     </header>
     <!-- header area end -->
     <!-- offset search area start -->
-    <div class="offset-search">
+    <!-- <div class="offset-search">
         <form action="#">
             <input type="text" name="search" placeholder="Sarch here...">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
-    </div>
+    </div> -->
     <!-- offset search area end -->
     <!-- body overlay area start -->
     <div class="body_overlay"></div>
@@ -143,7 +169,7 @@
             </div>
         </div>
     </div>
-    <!-- crumbs area end --> 
+    <!-- crumbs area end -->
     <!-- about area start -->
     <div class="about-area ptb--120">
         <div class="container">
@@ -151,17 +177,22 @@
                 <div class="col-lg-6">
                     <div class="about-left-content">
                         <div class="section-title">
-                             <span class="text-uppercase">about us</span>
-                            <h2>Welcome to</h2><h2><span>Our </span> <span class="primary-color">university</span></h2> 
+                            <span class="text-uppercase">about us</span>
+                            <h2>Welcome to</h2>
+                            <h2><span>Our </span> <span class="primary-color">ScholarVerify</span></h2>
                         </div>
-                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                        <p>At ScholarVerify, our mission is clear "To empower students studying in different states by
+                            providing a seamless and reliable institution-level verification process. We believe that
+                            every student, regardless of their location, should have equal access to scholarships and
+                            educational benefits. Our commitment to educational equity drives everything we do."</p>
                         <a href="#" class="btn btn-primary btn-round">Read more</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="abt-right-thumb">
                         <div class="abt-rt-inner">
-                            <a class="expand-video" href="https://www.youtube.com/watch?v=cdfMgotGKIM"><i class="fa fa-play"></i></a>
+                            <a class="expand-video" href="https://www.youtube.com/watch?v=cdfMgotGKIM"><i
+                                    class="fa fa-play"></i></a>
                         </div>
                     </div>
                 </div>
@@ -170,26 +201,27 @@
     </div>
     <!-- about area end -->
     <!-- take toure area start -->
-    <div class="take-toure-area ptb--120">
+    <!-- <div class="take-toure-area ptb--120">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="section-title sec-style-two">
-                        <img class="title-top-shape" src="{% static 'ScholarLink/assets/images/icon/title-top-shape.png' %}" alt="image">
+                        <img class="title-top-shape" src="assets/images/icon/title-top-shape.png" alt="image">
                         <span class="text-uppercase">Take A Tour</span>
                         <h2>Video Tour on Edification</h2>
                     </div>
                 </div>
             </div>
             <div class="video-area">
-                <a class="expand-video" href="https://www.youtube.com/watch?v=cdfMgotGKIM"><i class="fa fa-play"></i></a>
+                <a class="expand-video" href="https://www.youtube.com/watch?v=cdfMgotGKIM"><i
+                        class="fa fa-play"></i></a>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- take toure area end -->
- 
-     <!-- cta area start --> 
-    <div class="container pb--120">
+
+    <!-- cta area start -->
+    <!-- <div class="container pb--120">
         <div class="cta-area primary-bg has-color ptb--50 pl-5 pr-5">
             <div class="row align-items-center">
                 <div class="col-md-9">
@@ -205,7 +237,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div> -->
     <!-- cta area end -->
 
     <!-- teacher area start -->
@@ -214,150 +246,168 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6">
                     <div class="section-title">
-                        <span class="text-uppercase">Learn from <span class="primary-color">the best</span></span>
-                        <h2>Our Teachers </h2> 
+                        <h2>Our Values</h2>
                     </div>
                 </div>
             </div>
-            <div class="teacher-carousel owl-carousel card-deck">
-              <div class="card mb-5"> 
-                <img src="{% static 'ScholarLink/assets/images/teacher/teacher-member1.jpg' %}" alt="image"> 
-                <div class="card-body teacher-content p-25">  
-                  <h4 class="card-title mb-4"><a href="teachers.html">Patrick Garner Dony</a></h4>
-                  <span class="primary-color d-block mb-3">Economist</span>
-                  <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
-                  <ul class="list-inline">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                    <li><a href="#"><i class="fa fa-deviantart"></i></a></li>
-                    <li><a href="#"><i class="fa fa-github"></i></a></li>
-                  </ul>
-                </div>
-              </div><!-- card -->    
+            <ol style="list-style:disc; color: black; ">
+                <li><span style="font-size: 28px; font-weight:bold; color: #FC9928;">Transparency</span><br> <br> <span
+                        style="font-size: 22px; color: black;"> Operate with complete transparency, ensuring our users
+                        have a clear understanding of our processes and services.</span> </li>
+                <br>
+                <li><span style="font-size: 28px; font-weight:bold; color: #FC9928;">Inclusivity:</span> <br> <br><span
+                        style="font-size: 22px; color: black;">We are dedicated to inclusivity, ensuring that no student
+                        is left behind in their pursuit of education.</span></li>
+                <br>
+                <li><span style="font-size: 28px; font-weight:bold; color: #FC9928;">Dedication:</span> <br> <br><span
+                        style="font-size: 22px; color: black;"> We are deeply committed to our mission and work
+                        tirelessly to fulfill it.</span></li>
+            </ol>
+            <br>
+            <!-- <div class="teacher-carousel owl-carousel card-deck"> -->
+            <!-- <div class="card mb-5">
+                    <img src="assets/images/teacher/teacher-member1.jpg" alt="image">
+                    <div class="card-body teacher-content p-25">
+                        <h4 class="card-title mb-4"><a href="teachers.html">Patrick Garner Dony</a></h4>
+                        <span class="primary-color d-block mb-3">Economist</span>
+                        <p class="card-text">We’re a philosophical bunch here at School site and we have thought long
+                            and hard about.</p>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-deviantart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                    </div>
+                </div> -->
 
-              <div class="card mb-5"> 
-                <img src="{% static 'ScholarLink/assets/images/teacher/teacher-member2.jpg' %}" alt="image"> 
-                <div class="card-body teacher-content p-25">  
-                  <h4 class="card-title mb-4"><a href="teachers.html">Cameron Brown</a></h4>
-                  <span class="primary-color d-block mb-3">Financier</span>
-                  <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
-                  <ul class="list-inline">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                    <li><a href="#"><i class="fa fa-deviantart"></i></a></li>
-                    <li><a href="#"><i class="fa fa-github"></i></a></li>
-                  </ul>
-                </div>
-              </div><!-- card -->    
+            <!-- <div class="card mb-5">
+                    <img src="assets/images/teacher/teacher-member2.jpg" alt="image">
+                    <div class="card-body teacher-content p-25">
+                        <h4 class="card-title mb-4"><a href="teachers.html">Cameron Brown</a></h4>
+                        <span class="primary-color d-block mb-3">Financier</span>
+                        <p class="card-text">We’re a philosophical bunch here at School site and we have thought long
+                            and hard about.</p>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-deviantart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                    </div>
+                </div> card -->
 
-              <div class="card mb-5"> 
-                <img src="{% static 'ScholarLink/assets/images/teacher/teacher-member3.jpg' %}" alt="image"> 
-                <div class="card-body teacher-content p-25">  
-                  <h4 class="card-title mb-4"><a href="teachers.html">Joseph Mack Monika</a></h4>
-                  <span class="primary-color d-block mb-3">Languages</span>
-                  <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
-                  <ul class="list-inline">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                    <li><a href="#"><i class="fa fa-deviantart"></i></a></li>
-                    <li><a href="#"><i class="fa fa-github"></i></a></li>
-                  </ul>
-                </div>
-              </div><!-- card -->  
-              <div class="card mb-5"> 
-                <img src="{% static 'ScholarLink/assets/images/teacher/teacher-member4.jpg' %}" alt="image"> 
-                <div class="card-body teacher-content p-25">  
-                  <h4 class="card-title mb-4"><a href="teachers.html">Patrick Garner Dony</a></h4>
-                  <span class="primary-color d-block mb-3">Economist</span>
-                  <p class="card-text">We’re a philosophical bunch here at School site and we have thought long and hard about.</p> 
-                  <ul class="list-inline">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                    <li><a href="#"><i class="fa fa-deviantart"></i></a></li>
-                    <li><a href="#"><i class="fa fa-github"></i></a></li>
-                  </ul>
-                </div>
-              </div><!-- card -->    
-            </div>
+            <!-- <div class="card mb-5">
+                    <img src="assets/images/teacher/teacher-member3.jpg" alt="image">
+                    <div class="card-body teacher-content p-25">
+                        <h4 class="card-title mb-4"><a href="teachers.html">Joseph Mack Monika</a></h4>
+                        <span class="primary-color d-block mb-3">Languages</span>
+                        <p class="card-text">We’re a philosophical bunch here at School site and we have thought long
+                            and hard about.</p> -->
+            <!-- <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-deviantart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                    </div>
+                </div> card -->
+            <!-- <div class="card mb-5">
+                    <img src="assets/images/teacher/teacher-member4.jpg" alt="image">
+                    <div class="card-body teacher-content p-25">
+                        <h4 class="card-title mb-4"><a href="teachers.html">Patrick Garner Dony</a></h4>
+                        <span class="primary-color d-block mb-3">Economist</span> -->
+            <!-- <p class="card-text">We’re a philosophical bunch here at School site and we have thought long
+                            and hard about.</p>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-deviantart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-github"></i></a></li>
+                        </ul> -->
+            <!-- </div> -->
+            <!-- </div>card -->
+            <!-- </div>
         </div>
-    </div>
-    <!-- teacher area end -->
- 
-    <!-- footer area start -->
-    <footer>
-        <div class="footer-top has-color pt--120 pb--30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="widget widget-company">
-                            <a href="{% url 'index' %}"><img src="{% static 'ScholarLink/assets/images/icon/logo.png' %}" alt="image"></a>
-                            <div class="address">
-                                <h6>OFFICE ADDRESS</h6>
-                                <p>London Oxford Street, 012 United Kingdom.</p>
+    </div>   -->
+            <!-- teacher area end -->
+
+            <!-- footer area start -->
+            <br>
+            <footer>
+                <div class="main-content">
+                    <div class="left box">
+                        <h2 style="color: white;">About us</h2>
+                        <div class="content">
+                            <p>ScholarVerify, your trusted platform, bridges the gap for students studying in different states.
+                            </p>
+                            <div class="social">
+                                <a href="https://facebook.com/coding.np"><span class="fab fa-facebook-f"></span></a>
+                                <a href="#"><span class="fab fa-twitter"></span></a>
+                                <a href="https://instagram.com/coding.np"><span class="fab fa-instagram"></span></a>
+                                <a href="https://youtube.com/c/codingnepal"><span class="fab fa-youtube"></span></a>
                             </div>
-                            <div class="address">
-                                <h6>BUSINESS PHONE</h6>
-                                <p>+012 3456 7890</p>
-                            </div>
-                            <div class="address">
-                                <h6>BUSINESS EMAIL</h6>
-                                <p>Business@themerocket.net</p>
-                            </div>
-                            <ul class="social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="widget footer-link">
-                            <h4 class="fwidget-title mb-5 pb-3 primary-color">Footer Menu</h4> 
-                            <ul>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>Case Studies</a></li>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>About Us</a></li>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>Our Story</a></li>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>Blog Post</a></li>
-                                <li><a href="#"><i class="fa fa-arrow-right"></i>Work with Us</a></li>
-                            </ul>
+                    <div class="center box">
+                        <h2  style="color: white;">Address</h2>
+                        <div class="content">
+                            <div class="place">
+                                <span class="fas fa-map-marker-alt"></span>
+                                <span class="text">Birendranagar, Surkhet</span>
+                            </div>
+                            <div class="phone">
+                                <span class="fas fa-phone-alt"></span>
+                                <span class="text">+089-765432100</span>
+                            </div>
+                            <div class="email">
+                                <span class="fas fa-envelope"></span>
+                                <span class="text">abc@example.com</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <div class="widget widget-opening">
-                            <h4 class="fwidget-title mb-5 pb-3 primary-color">Working Day & time</h4>
-                            <p>Architecto beatae vitae dicta sunt ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
-                            <ul>
-                                <li><span>Mon - Tus :</span>6.00 am - 10.00 pm</li>
-                                <li><span>Wed - Tur :</span>8.00 am - 6.00 pm</li>
-                                <li><span>Friday :</span>3.00 pm - 8.00 pm</li>
-                                <li><span>Sunday :</span>Closed</li>
-                            </ul>
+                    <div class="right box">
+                        <h2  style="color: white;">Contact us</h2>
+                        <div class="content">
+                            <form action="#">
+                                <div class="email">
+                                    <div class="text">Email *</div>
+                                    <input type="email" required>
+                                </div>
+                                <div class="msg">
+                                    <div class="text">Message *</div>
+                                    <textarea rows="2" cols="25" required></textarea>
+                                </div>
+                                <div class="btn">
+                                    <button type="submit">Send</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="footer-bottom">
-                    <p>Copyright © 2022 <span><a class="primary-color" href="https://themeforest.net/user/pixelthemez/portfolio" target="_blank">Edification</a> </span> - All Rights Reserved. Made by <span><a class="primary-color" href="https://furioustheme.com/" target="_blank">Furioustheme</a></span></p>
+                <div class="bottom">
+                    <center>
+                        <span class="credit">Created By <a href="https://www.codingnepalweb.com">Scholar Verify</a> | </span>
+                        <span class="far fa-copyright"></span><span> 2020 All rights reserved.</span>
+                    </center>
                 </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer area end -->
- 
-    <!-- jquery latest version -->
-    <script src="{% static 'ScholarLink/assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
-    <!-- bootstrap 4 js -->
-    <script src="{% static 'ScholarLink/assets/js/bootstrap.min.js' %}"></script>
-    <!-- others plugins -->
-    <script src="{% static 'ScholarLink/assets/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'ScholarLink/assets/js/jquery.magnific-popup.min.js' %}"></script>
-    <script src="{% static 'ScholarLink/assets/js/jquery.slicknav.min.js' %}"></script>
-    <script src="{% static 'ScholarLink/assets/js/plugins.js' %}"></script>
-    <script src="{% static 'ScholarLink/assets/js/scripts.js' %}"></script>
+            </footer>
+            <!-- footer area end -->
+
+            <!-- jquery latest version -->
+            <script src='{% static "ScholarLink/assets/js/vendor/jquery-2.2.4.min.js" %}'></script>
+            <!-- bootstrap 4 js -->
+            <script src='{% static "assets/js/bootstrap.min.js" %}'></script>
+            <!-- others plugins -->
+            <script src='{% static "ScholarLink/assets/js/owl.carousel.min.js" %}'></script>
+            <script src='{% static "ScholarLink/assets/js/jquery.magnific-popup.min.js" %}'></script>
+            <script src='{% static "ScholarLink/assets/js/jquery.slicknav.min.js" %}'></script>
+            <script src='{% static "ScholarLink/assets/js/plugins.js" %}'></script>
+            <script src='{% static "ScholarLink/assets/js/scripts.js" %}'></script>
 </body>
-
+  </body>
 </html>

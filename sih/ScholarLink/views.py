@@ -14,12 +14,223 @@ from .forms import *
 
 # Create your views here.
 
+def dashboard(request):
+    if request.user.is_authenticated:
+        scholarship_data = Scholarship.objects.all().values()
+        print(scholarship_data)
+        username = request.user.username
+        email = request.user.email
+        
+        print(username, email)
+
+        return render(request, 'ScholarLink/Dashboard.html', {'scholarship_data':scholarship_data, 'username': username, 'email':email})
+    else:
+        return render(request, "ScholarLink/login.html")
+
+def profile(request):
+    return render(request, "ScholarLink/profile.html")
+
+def faq(request):
+    return render(request, "ScholarLink/faq.html")
+
+def upload(request):
+    return render(request, "ScholarLink/upload.html")
+
+def application(request):
+    
+    try:
+        student = Student.objects.get(student = request.user)
+        data = []
+        
+        institute_detail = student.institution.institute_detail
+        contact_detail = student.institution.contact_detail
+        institution_doc = student.institution.institution_doc
+
+        # Create a dictionary for InstituteDetail
+        institute_detail_dict = {
+            'name': institute_detail.name,
+            'abbreviation': institute_detail.abbreviation,
+            'website': institute_detail.website,
+            'established_year': institute_detail.established_year,
+            'registration_number': institute_detail.registration_number,
+        }
+
+        # Create a dictionary for ContactDetail
+        contact_detail_dict = {
+            'contact_email': contact_detail.contact_email,
+            'contact_phone': contact_detail.contact_phone,
+            'address': contact_detail.address,
+            'city': contact_detail.city,
+            'state': contact_detail.state,
+            'pincode': contact_detail.pincode,
+            'country': contact_detail.country,
+        }
+
+        # Create a dictionary for InstituteDoc
+        institute_doc_dict = {
+            'logo': institution_doc.logo.url if institution_doc.logo else None,
+            'scholarships_offered': list(institution_doc.scholarships_offered.values_list('name', flat=True)),
+            'accredited_by': list(institution_doc.accredited_by.values_list('name', flat=True)),
+            'affiliation_document': institution_doc.affiliation_document.url if institution_doc.affiliation_document else None,
+        }
+
+        # Create a dictionary for PersonalDetail
+        personal_detail_dict = {
+            'Firstname': student.personal_detail.first_name,
+            'Lastname': student.personal_detail.last_name,
+            'Enrollment number': student.personal_detail.enrollment_number,
+            'Date of birth': student.personal_detail.date_of_birth,
+        }
+
+        # Create a dictionary for ContactDetail
+        contact_detail_dict = {
+            'Email id': student.contact_detail.contact_email,
+            'Phone Number': student.contact_detail.contact_phone,
+            'Address': student.contact_detail.address,
+            'City': student.contact_detail.city,
+            'State': student.contact_detail.state,
+            'Pincode': student.contact_detail.pincode,
+            'Country': student.contact_detail.country,
+        }
+
+        # Create a dictionary for GuardianDetail
+        guardian_detail_dict = {
+            'Guardian name': student.guardian_detail.guardian_name,
+            'Guardian phone': student.guardian_detail.guardian_phone,
+            'Guardian email': student.guardian_detail.guardian_email,
+            'Guardian gender': student.guardian_detail.guardian_gender,
+        }
+
+        # Create a dictionary for FileDetail
+        file_detail_dict = {
+            'Profile picture': student.file_detail.profile_pic.url if student.file_detail.profile_pic else "thehe",
+            'Signature': student.file_detail.signature.url if student.file_detail.signature else None,
+            'Aadhaar': student.file_detail.aadhaar.url if student.file_detail.aadhaar else None,
+            'Income certificate': student.file_detail.income_cert.url if student.file_detail.income_cert else None,
+        }
+        verification = {
+            'is_verfied':student.is_verified,
+            'Status' : student.status,
+            'Reason' : student.reason
+
+        }
+        data.append(personal_detail_dict)
+        data.append(contact_detail_dict)
+        data.append(guardian_detail_dict)
+        data.append(institute_detail_dict)
+        data.append(institute_doc_dict)
+        data.append(file_detail_dict)
+        data.append(verification)
+        print("HHHHHHHHHHH")
+        print("HHHHHHHHHHH")
+        print("HHHHHHHHHHH")
+        print(verification)
+        print("HHHHHHHHHHH")
+        print("HHHHHHHHHHH")
+        print("HHHHHHHHHHH")
+        print("HHHHHHHHHHH")
+
+        return render(request, "ScholarLink/applications.html", {'data':data} )
+    except Exception as e:
+        print(e)
+        print("in else")
+        return redirect(reverse('dashboard'))
+    
+def student_profile_dashboard(request):
+    try:
+        student = Student.objects.get(student = request.user)
+        data = []
+        
+        institute_detail = student.institution.institute_detail
+        contact_detail = student.institution.contact_detail
+        institution_doc = student.institution.institution_doc
+
+        # Create a dictionary for InstituteDetail
+        institute_detail_dict = {
+            'name': institute_detail.name,
+            'abbreviation': institute_detail.abbreviation,
+            'website': institute_detail.website,
+            'established_year': institute_detail.established_year,
+            'registration_number': institute_detail.registration_number,
+        }
+
+        # Create a dictionary for ContactDetail
+        contact_detail_dict = {
+            'contact_email': contact_detail.contact_email,
+            'contact_phone': contact_detail.contact_phone,
+            'address': contact_detail.address,
+            'city': contact_detail.city,
+            'state': contact_detail.state,
+            'pincode': contact_detail.pincode,
+            'country': contact_detail.country,
+        }
+
+        # Create a dictionary for InstituteDoc
+        institute_doc_dict = {
+            'logo': institution_doc.logo.url if institution_doc.logo else None,
+            'scholarships_offered': list(institution_doc.scholarships_offered.values_list('name', flat=True)),
+            'accredited_by': list(institution_doc.accredited_by.values_list('name', flat=True)),
+            'affiliation_document': institution_doc.affiliation_document.url if institution_doc.affiliation_document else None,
+        }
+
+        # Create a dictionary for PersonalDetail
+        personal_detail_dict = {
+            'First name': student.personal_detail.first_name,
+            'Last name': student.personal_detail.last_name,
+            'Enrollment number': student.personal_detail.enrollment_number,
+            'Date of birth': student.personal_detail.date_of_birth,
+        }
+
+        # Create a dictionary for ContactDetail
+        contact_detail_dict = {
+            'Email id': student.contact_detail.contact_email,
+            'Phone Number': student.contact_detail.contact_phone,
+            'Address': student.contact_detail.address,
+            'City': student.contact_detail.city,
+            'State': student.contact_detail.state,
+            'Pincode': student.contact_detail.pincode,
+            'Country': student.contact_detail.country,
+        }
+
+        # Create a dictionary for GuardianDetail
+        guardian_detail_dict = {
+            'Guardian name': student.guardian_detail.guardian_name,
+            'Guardian phone': student.guardian_detail.guardian_phone,
+            'Guardian email': student.guardian_detail.guardian_email,
+            'Guardian gender': student.guardian_detail.guardian_gender,
+        }
+
+        # Create a dictionary for FileDetail
+        file_detail_dict = {
+            'Profile picture': student.file_detail.profile_pic.url if student.file_detail.profile_pic else "thehe",
+            'Signature': student.file_detail.signature.url if student.file_detail.signature else None,
+            'Aadhaar': student.file_detail.aadhaar.url if student.file_detail.aadhaar else None,
+            'Income certificate': student.file_detail.income_cert.url if student.file_detail.income_cert else None,
+        }
+        data.append(personal_detail_dict)
+        data.append(contact_detail_dict)
+        data.append(guardian_detail_dict)
+        data.append(institute_detail_dict)
+        data.append(institute_doc_dict)
+        data.append(file_detail_dict)
+        # print(data[0])
+
+        username = request.user.username
+        email = request.user.email
+        
+        return render(request, 'ScholarLink/profile.html' , {'data':data, 'username':username, 'email':email})
+    except Exception as e:
+        print(e)
+        return HttpResponseRedirect(reverse("index"))
+
+
+
+def scholarship(request):
+    return render(request, "ScholarLink/myscholarship.html")
+
 @login_required(login_url="login/")
 def index(request):
-    return render(request, "ScholarLink/index.html", {
-        "student": Student.objects.filter(student=request.user),
-        "institute": Institution.objects.filter(institute=request.user)
-    })
+    return render(request, "ScholarLink/index.html")
 
 def login_view(request):
     if request.method == "POST":
@@ -32,7 +243,8 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            redirect_url = reverse('index') + '?message=success'
+            return HttpResponseRedirect(redirect_url)
         else:
             return render(request, "ScholarLink/login.html", {
                 "message": "Invalid username and/or password."

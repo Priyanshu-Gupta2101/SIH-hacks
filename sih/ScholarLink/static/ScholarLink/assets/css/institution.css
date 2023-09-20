@@ -1,42 +1,30 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   outline: none;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background-image: url("./hero-bg2.jpg");
-  object-fit: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-}
-
-input:focus {
-  outline: 1px solid #fc9928;
+  overflow: auto;
 }
 
 ::selection {
   color: #fff;
-  background: #fc9928;
+  background: #FC9928;
 }
 
 nav {
-  background-color: black;
-  position: fixed;
-  z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
   padding: 20px;
   transition: all 0.4s ease;
-  /* border-bottom: 1px black solid; */
 }
 
 nav.sticky {
@@ -75,15 +63,15 @@ nav.sticky .logo a {
 
 .nav-links li a {
   text-decoration: none;
-  color: white;
+  color: #0E2431;
   font-size: 18px;
   font-weight: 500;
-  padding: 10px 6px;
+  padding: 10px 4px;
   transition: all 0.3s ease;
 }
 
 .nav-links li a:hover {
-  color: #fc9928;
+  color: #4070f4;
 }
 
 nav.sticky .nav-links li a {
@@ -92,7 +80,7 @@ nav.sticky .nav-links li a {
 }
 
 nav.sticky .nav-links li a:hover {
-  color: #0e2431;
+  color: #0E2431;
 }
 
 .container {
@@ -113,7 +101,7 @@ nav.sticky .nav-links li a:hover {
   overflow: hidden;
 }
 
-.container .form-outer form {
+.container .form-outer .slide-page {
   display: flex;
   width: 400%;
 }
@@ -163,7 +151,7 @@ form .page .field button {
   width: 100%;
   height: calc(100% + 5px);
   border: none;
-  background: #fc9928;
+  background: #FC9928;
   margin-top: -20px;
   border-radius: 5px;
   color: #fff;
@@ -218,7 +206,7 @@ form .page .field .submit {
   width: 100%;
   height: calc(100% + 5px);
   border: none;
-  background: #fc9928;
+  background: #FC9928;
   margin-top: -20px;
   border-radius: 5px;
   color: #fff;
@@ -250,8 +238,8 @@ form .page .field .submit:hover {
 }
 
 .progress-bar .step .bullet.active {
-  border-color: #fc9928;
-  background: #fc9928;
+  border-color: #FC9928;
+  background: #FC9928;
 }
 
 .progress-bar .step .bullet span {
@@ -272,7 +260,7 @@ form .page .field .submit:hover {
 .progress-bar .step .bullet:before,
 .progress-bar .step .bullet:after {
   position: absolute;
-  content: "";
+  content: '';
   bottom: 11px;
   right: -51px;
   height: 3px;
@@ -281,7 +269,7 @@ form .page .field .submit:hover {
 }
 
 .progress-bar .step .bullet.active:after {
-  background: #fc9928;
+  background: #FC9928;
   transform: scaleX(0);
   transform-origin: left;
   animation: animate 0.3s linear forwards;

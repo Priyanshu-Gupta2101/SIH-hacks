@@ -25,18 +25,17 @@ class AccreditationBody(models.Model):
     def __str__(self):
         return self.name
 
-
 class Scholarship(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     eligibility_criteria = models.TextField()
-    award_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    state_specific = models.BooleanField(default=False)
+    state_name = models.CharField(null = True, max_length=50)
+    # award_amount = models.DecimalField(max_digits=10, decimal_places=2)
     provider = models.CharField(max_length=100)
     website = models.URLField(blank=True, null=True)
     contact_email = models.EmailField()
 
-    def __str__(self):
-        return self.name
 
 
 class InstituteDetail(models.Model):
@@ -60,19 +59,19 @@ class ContactDetail(models.Model):
 class InstituteDoc(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='institution_logo/', blank=True, null=True)
-    scholarships_offered = models.ManyToManyField(Scholarship, related_name='scholarship_institutions', blank=True)
-    accredited_by = models.ManyToManyField(AccreditationBody, related_name="authorized_institutions" ,blank=True) 
+    scholarships_offered = models.ManyToManyField(Scholarship, related_name='scholarship_institutions')
+    accredited_by = models.ManyToManyField(AccreditationBody, related_name="authorized_institutions") 
     affiliation_document = models.FileField(upload_to='affiliation_document/')
 
 
 class Institution(models.Model):
-    institute = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     institute_detail = models.ForeignKey(InstituteDetail, on_delete=models.CASCADE,blank=True, null=True)
     contact_detail = models.ForeignKey(ContactDetail, on_delete=models.CASCADE, blank=True, null=True)
     institution_doc = models.ForeignKey(InstituteDoc, on_delete=models.CASCADE, blank=True, null=True)
 
-    def __str__(self):
-        return self.institute_detail.name
+    # def __str__(self):
+    #     return self.user
     
 
 class PersonalDetail(models.Model):
@@ -106,29 +105,32 @@ class Student(models.Model):
     contact_detail = models.ForeignKey(ContactDetail, on_delete=models.CASCADE, blank=True, null=True)
     guardian_detail = models.ForeignKey(GuardianDetail, on_delete=models.CASCADE, blank=True, null=True)
     file_detail = models.ForeignKey(FileDetail, on_delete=models.CASCADE, blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
+    status = models.CharField(max_length=20,default='Pending')
+    reason = models.CharField(max_length=100, null = True)
     last_updated = models.DateTimeField(auto_now=True)
-
+    
     def __str__(self):
         return f"{self.student.username}'s Profile with {self.personal_detail.enrollment_number}"
 
 
+class Applications(models.Model):
+    student = models.OneToOneField(User, on_delete=models.CASCADE)
+    # list_of_applied = 
 
+# class VerificationStatus(models.Model):
+#     student = models.OneToOneField(User, on_delete=models.CASCADE)
+#     registration = models.BooleanField(default=False)
+#     applications = models.
+#     is_verified = models.BooleanField(default=False)
+#     status = models.CharField(max_length=20, null = True)
+#     reason = models.CharField(max_length=100, null = True)
+#     last_updated = models.DateTimeField(auto_now=True)
 
-
-
-
-
+#     def __str__(self):
+#         return f"{self.student.first_name}'s Verification Status"
 
 '''
-class VerificationStatus(models.Model):
-    student = models.OneToOneField(Student, on_delete=models.CASCADE)
-    is_verified = models.BooleanField(default=False)
-    last_updated = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.student.full_name}'s Verification Status"
-
-
 class Application(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE)
