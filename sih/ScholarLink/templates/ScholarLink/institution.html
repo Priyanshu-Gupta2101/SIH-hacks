@@ -18,20 +18,27 @@
 
 <body>
     
-    <nav>
+    <nav style="opacity: 0.85">
         <div class="nav-content">
+          <div class="logo">
             <div class="logo">
-                <a href="#">CodingLab.</a>
+              <a href="{% url 'index' %}"
+                ><img
+                  src='{% static "ScholarLink/assets/images/icon/logo-middle.png" %}'
+                  alt="logo"
+              /></a>
             </div>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Skills</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+          </div>
+  
+          <ul class="nav-links">
+            <li><a href="{% url 'index' %}">HOME</a></li>
+            <li><a href="{% url 'about' %}">ABOUT</a></li>
+            <li><a href="#">DASHBOARD</a></li>
+            <li><a href="{% url 'contact' %}">CONTACT</a></li>
+          </ul>
         </div>
     </nav>
+
     <div style="margin-left: 35%; ">
     <h2 >Institution Form</h2>
     <div class="container" style="margin-left: 0%;">
