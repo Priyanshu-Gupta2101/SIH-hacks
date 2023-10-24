@@ -25,6 +25,7 @@ urlpatterns = [
     path('applications/', views.applications, name='applications'),
     path('faqs/', views.faq, name='faq'),
     path('institution_profile/', views.institution_profile_dashboard, name='institution_profile_dashboard'),
+    path('activate/<uidb64>/<token>', views.activate, name='activate'),
 ]
 
 if settings.DEBUG:
