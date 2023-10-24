@@ -108,6 +108,9 @@ class Student(models.Model):
     contact_detail = models.ForeignKey(ContactDetail, on_delete=models.CASCADE, blank=True, null=True)
     guardian_detail = models.ForeignKey(GuardianDetail, on_delete=models.CASCADE, blank=True, null=True)
     file_detail = models.ForeignKey(FileDetail, on_delete=models.CASCADE, blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('approved', 'Approved'), ('rejected', 'Rejected')])
+    reason = models.TextField(blank=True, null=True)
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):

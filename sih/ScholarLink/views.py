@@ -543,6 +543,30 @@ def institution_doc(request):
         return HttpResponse(status=204)   
     
 
+def notify(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print(data)
+        student = Student.objects.get(student=request.user)
+        student.is_verified = data.get('is_verified')
+        student.status = data.get('status')
+        student.reason = data.get('reason')
+        student.save()
+
+        #Email this to the student
+        mail_subject = 'Scholarship Application Status'
+        message = render_to_string('ScholarLink/template_application_status.html', {
+            'user': student.student.username,
+            'status': student.status,
+            'reason': student.reason,
+        })
+        email = EmailMessage(mail_subject, message, to=[student.student.email])
+        if email.send():
+            messages.success(request, f'Dear <b>{student.student.username}</b>, your application status has been updated. \
+                Please check your email <b>{student.student.email}</b> for more details.')
+        else:
+            messages.error(request, f'Problem sending confirmation email to {student.student.email}, check if you typed it correctly.')
+        return HttpResponse(status=204)
 
 
 
