@@ -6,6 +6,16 @@ from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import EmailMessage
+
+from django.contrib import messages
+
+from .tokens import account_activation_token
+
 
 import json
 
@@ -258,6 +268,23 @@ def logout_view(request):
     return HttpResponseRedirect(reverse("index"))
 
 
+def activateEmail(request, user, email):
+    mail_subject = 'Activate your user account.'
+    message = render_to_string('ScholarLink/template_activate_account.html', {
+        'user': user.username,
+        'domain': get_current_site(request).domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+        'protocol': 'https' if request.is_secure() else 'http'
+    })
+    email = EmailMessage(mail_subject, message, to=[email])
+    if email.send():
+        messages.success(request, f'Dear <b>{user}</b>, please go to you email <b>{email}</b> inbox and click on \
+            received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.')
+    else:
+        messages.error(request, f'Problem sending confirmation email to {email}, check if you typed it correctly.')
+
+
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -266,15 +293,18 @@ def register(request):
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
+
+        # Attempt to create new user
         if password != confirmation:
             return render(request, "ScholarLink/login.html", {
                 "message": "Passwords must match."
             })
 
-        # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
+            #user.is_active = False
             user.save()
+            activateEmail(request, user, email)
         except IntegrityError:
             return render(request, "ScholarLink/login.html", {
                 "message": "Username already taken."
@@ -285,12 +315,47 @@ def register(request):
         return render(request, "ScholarLink/login.html")
     
 
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+
+        messages.success(request, 'Thank you for your email confirmation. Now you can login your account.')
+        return redirect('login')
+    else:
+        messages.error(request, 'Activation link is invalid!')
+    
+    return redirect('index')
+    
+
 def about(request):
     return render(request, "ScholarLink/about.html")
 
 
 def contact(request):
     return render(request, "ScholarLink/contact.html")
+
+def faq(request):
+    if request.user.is_authenticated:
+        scholarship_data = Scholarship.objects.all().values()
+        print(scholarship_data)
+        username = request.user.username
+        email = request.user.email
+        
+        print(username, email)
+
+        return render(request, 'ScholarLink/faq.html', {'scholarship_data':scholarship_data, 'username': username, 'email':email})
+    else:    
+        return render(request, "ScholarLink/login.html")
+
+def institution_profile_dashboard(req):
+    return render(req, 'ScholarLink/institution_dashboard.html')
 
 
 def student(request):
@@ -421,7 +486,199 @@ def file_detail(request):
                 file_detail.save()
 
         return HttpResponse(status=204)
-    
+
+def student_profile_dashboard(request):
+    try:
+        student = Student.objects.get(student = request.user)
+        data = []
+        
+        institute_detail = student.institution.institute_detail
+        contact_detail = student.institution.contact_detail
+        institution_doc = student.institution.institution_doc
+
+        # Create a dictionary for InstituteDetail
+        institute_detail_dict = {
+            'name': institute_detail.name,
+            'abbreviation': institute_detail.abbreviation,
+            'website': institute_detail.website,
+            'established_year': institute_detail.established_year,
+            'registration_number': institute_detail.registration_number,
+        }
+
+        # Create a dictionary for ContactDetail
+        contact_detail_dict = {
+            'contact_email': contact_detail.contact_email,
+            'contact_phone': contact_detail.contact_phone,
+            'address': contact_detail.address,
+            'city': contact_detail.city,
+            'state': contact_detail.state,
+            'pincode': contact_detail.pincode,
+            'country': contact_detail.country,
+        }
+
+        # Create a dictionary for InstituteDoc
+        institute_doc_dict = {
+            'logo': institution_doc.logo.url if institution_doc.logo else None,
+            'scholarships_offered': list(institution_doc.scholarships_offered.values_list('name', flat=True)),
+            'accredited_by': list(institution_doc.accredited_by.values_list('name', flat=True)),
+            'affiliation_document': institution_doc.affiliation_document.url if institution_doc.affiliation_document else None,
+        }
+
+        # Create a dictionary for PersonalDetail
+        personal_detail_dict = {
+            'First name': student.personal_detail.first_name,
+            'Last name': student.personal_detail.last_name,
+            'Enrollment number': student.personal_detail.enrollment_number,
+            'Date of birth': student.personal_detail.date_of_birth,
+        }
+
+        # Create a dictionary for ContactDetail
+        contact_detail_dict = {
+            'Email id': student.contact_detail.contact_email,
+            'Phone Number': student.contact_detail.contact_phone,
+            'Address': student.contact_detail.address,
+            'City': student.contact_detail.city,
+            'State': student.contact_detail.state,
+            'Pincode': student.contact_detail.pincode,
+            'Country': student.contact_detail.country,
+        }
+
+        # Create a dictionary for GuardianDetail
+        guardian_detail_dict = {
+            'Guardian name': student.guardian_detail.guardian_name,
+            'Guardian phone': student.guardian_detail.guardian_phone,
+            'Guardian email': student.guardian_detail.guardian_email,
+            'Guardian gender': student.guardian_detail.guardian_gender,
+        }
+
+        # Create a dictionary for FileDetail
+        file_detail_dict = {
+            'Profile picture': student.file_detail.profile_pic.url if student.file_detail.profile_pic else "thehe",
+            'Signature': student.file_detail.signature.url if student.file_detail.signature else None,
+            'Aadhaar': student.file_detail.aadhaar.url if student.file_detail.aadhaar else None,
+            'Income certificate': student.file_detail.income_cert.url if student.file_detail.income_cert else None,
+        }
+        data.append(personal_detail_dict)
+        data.append(contact_detail_dict)
+        data.append(guardian_detail_dict)
+        data.append(institute_detail_dict)
+        data.append(institute_doc_dict)
+        data.append(file_detail_dict)
+        # print(data[0])
+
+        username = request.user.username
+        email = request.user.email
+        
+        return render(request, 'ScholarLink/profile.html' , {'data':data, 'username':username, 'email':email})
+    except Exception as e:
+        print(e)
+        return HttpResponseRedirect(reverse("index"))
+
+def dashboard(request):
+    if request.user.is_authenticated:
+        scholarship_data = Scholarship.objects.all().values()
+        print(scholarship_data)
+        username = request.user.username
+        email = request.user.email
+        
+        print(username, email)
+
+        return render(request, 'ScholarLink/Dashboard.html', {'scholarship_data':scholarship_data, 'username': username, 'email':email})
+    else:
+        return render(request, "ScholarLink/login.html")
+
+
+def applications(request):
+    try:
+        student = Student.objects.get(student = request.user)
+        data = []
+        
+        institute_detail = student.institution.institute_detail
+        contact_detail = student.institution.contact_detail
+        institution_doc = student.institution.institution_doc
+
+        # Create a dictionary for InstituteDetail
+        institute_detail_dict = {
+            'name': institute_detail.name,
+            'abbreviation': institute_detail.abbreviation,
+            'website': institute_detail.website,
+            'established_year': institute_detail.established_year,
+            'registration_number': institute_detail.registration_number,
+        }
+
+        # Create a dictionary for ContactDetail
+        contact_detail_dict = {
+            'contact_email': contact_detail.contact_email,
+            'contact_phone': contact_detail.contact_phone,
+            'address': contact_detail.address,
+            'city': contact_detail.city,
+            'state': contact_detail.state,
+            'pincode': contact_detail.pincode,
+            'country': contact_detail.country,
+        }
+
+        # Create a dictionary for InstituteDoc
+        institute_doc_dict = {
+            'logo': institution_doc.logo.url if institution_doc.logo else None,
+            'scholarships_offered': list(institution_doc.scholarships_offered.values_list('name', flat=True)),
+            'accredited_by': list(institution_doc.accredited_by.values_list('name', flat=True)),
+            'affiliation_document': institution_doc.affiliation_document.url if institution_doc.affiliation_document else None,
+        }
+
+        # Create a dictionary for PersonalDetail
+        personal_detail_dict = {
+            'Firstname': student.personal_detail.first_name,
+            'Lastname': student.personal_detail.last_name,
+            'Enrollment number': student.personal_detail.enrollment_number,
+            'Date of birth': student.personal_detail.date_of_birth,
+        }
+
+        # Create a dictionary for ContactDetail
+        contact_detail_dict = {
+            'Email id': student.contact_detail.contact_email,
+            'Phone Number': student.contact_detail.contact_phone,
+            'Address': student.contact_detail.address,
+            'City': student.contact_detail.city,
+            'State': student.contact_detail.state,
+            'Pincode': student.contact_detail.pincode,
+            'Country': student.contact_detail.country,
+        }
+
+        # Create a dictionary for GuardianDetail
+        guardian_detail_dict = {
+            'Guardian name': student.guardian_detail.guardian_name,
+            'Guardian phone': student.guardian_detail.guardian_phone,
+            'Guardian email': student.guardian_detail.guardian_email,
+            'Guardian gender': student.guardian_detail.guardian_gender,
+        }
+
+        # Create a dictionary for FileDetail
+        file_detail_dict = {
+            'Profile picture': student.file_detail.profile_pic.url if student.file_detail.profile_pic else "thehe",
+            'Signature': student.file_detail.signature.url if student.file_detail.signature else None,
+            'Aadhaar': student.file_detail.aadhaar.url if student.file_detail.aadhaar else None,
+            'Income certificate': student.file_detail.income_cert.url if student.file_detail.income_cert else None,
+        }
+        # verification = {
+        #     'is_verfied':student.is_verified,
+        #     'Status' : student.status,
+        #     'Reason' : student.reason
+        # }
+        data.append(personal_detail_dict)
+        data.append(contact_detail_dict)
+        data.append(guardian_detail_dict)
+        data.append(institute_detail_dict)
+        data.append(institute_doc_dict)
+        data.append(file_detail_dict)
+        # data.append(verification)
+        # print(verification)
+
+        return render(request, "ScholarLink/applications.html", {'data':data} )
+    except Exception as e:
+        print(e)
+        print("in else")
+        return redirect(reverse('dashboard'))
+
 
 def institute_select(request):
     if request.method == 'POST':
@@ -498,6 +755,30 @@ def institution_doc(request):
         return HttpResponse(status=204)   
     
 
+def notify(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print(data)
+        student = Student.objects.get(student=request.user)
+        student.is_verified = data.get('is_verified')
+        student.status = data.get('status')
+        student.reason = data.get('reason')
+        student.save()
+
+        #Email this to the student
+        mail_subject = 'Scholarship Application Status'
+        message = render_to_string('ScholarLink/template_application_status.html', {
+            'user': student.student.username,
+            'status': student.status,
+            'reason': student.reason,
+        })
+        email = EmailMessage(mail_subject, message, to=[student.student.email])
+        if email.send():
+            messages.success(request, f'Dear <b>{student.student.username}</b>, your application status has been updated. \
+                Please check your email <b>{student.student.email}</b> for more details.')
+        else:
+            messages.error(request, f'Problem sending confirmation email to {student.student.email}, check if you typed it correctly.')
+        return HttpResponse(status=204)
 
 
 

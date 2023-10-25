@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-lg-2 col-sm-5">
                         <div class="header-bottom-right-style-2">
-                            {% if request.GET.message == 'success' %}
+                            {% if user.is_authenticated %}
                             <ul>
                                 <li><a class="btn btn-light btn-round" href="{% url 'logout' %}">Logout</a></li>
                             </ul>
@@ -84,13 +84,22 @@
                     </div>
                 </div>
             </div>
+            <div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
             <!-- header two area end -->
     </header>
     <!-- header area end -->
     <!-- offset search area start -->
     <div class="offset-search">
         <form action="#">
-            <input type="text" name="search" placeholder="Sarch here...">
+            <input type="text" name="search" placeholder="Search here...">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
@@ -208,7 +217,7 @@
     <br>
 
     <div class="testimonial-area ptb--120"><!-- testimonial area start -->
-        <img class="tst-bg" src="{% static 'ScholarLink/assetss/images/bg/tst-bg-shape.png' %}" alt="image">
+        <img class="tst-bg" src="{% static 'ScholarLink/assets/images/bg/tst-bg-shape.png' %}" alt="image">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 text-center">
